@@ -1,0 +1,46 @@
+<form method="post" style="margin-top: 2cm">{% csrf_token %}
+    <table id="supplierForm" style="margin-left: 15%; margin-right: 15%">
+{#        <col style="width: 5cm">#}
+{#        <col style="width: 5cm">#}
+{#        <col style="width: 5cm">#}
+{#        <col style="width: 5cm">#}
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+
+
+        <div style="text-align: center">
+            <formTitle>SUPPLIER UPDATE FORM</formTitle>
+        </div>
+
+        <thead>
+            <tr>
+                <th class="rowTitle">ID</th>
+                <th class="rowTitle">SUPPLIER</th>
+                <th class="rowTitle">PASSWORD</th>
+                <th class="rowTitle">ACTION</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td style="text-align: center">{{ supplierForm.splID }}</td>
+                <td style="text-align: center">{{ supplierForm.splName }}</td>
+                <td style="text-align: center">{{ supplierForm.splPassword }}</td>
+{#                <td style="text-align: center">{{ supplierForm.supplierID }}</td>#}
+{#                <td style="text-align: center">{{ supplierForm.supplierName }}</td>#}
+{#                <td style="text-align: center">{{ supplierForm.SPLpassword }}</td>#}
+                <td style="text-align: center">
+                    <button type="submit" id="saveSupplier" name="saveSupplier" onclick="saveSpl()" class="buttonAccept">Save/Update</button>
+                    <button type="submit" id="deleteSupplier" name="deleteSupplier" onclick="deleteSpl()" class="buttonDelete">Delete</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">{{ supplierForm.non_field_errors }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>

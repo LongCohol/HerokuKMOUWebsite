@@ -1,0 +1,119 @@
+<table id="companyList" style="margin-left: 15%; margin-right: auto" class="rowHoverStyle">
+    <col style="width:4cm">
+    <col style="width:4cm">
+    <col style="width:6cm">
+    <col style="width:4cm">
+    <col style="width:24cm">
+
+    <div style="text-align: center; margin-top: 1cm">
+        <formTitle>SHIPPING COMPANY LIST</formTitle>
+    </div>
+
+    <thead>
+        <tr>
+            <th class="rowTitle">ID</th>
+            <th class="rowTitle">COMPANY</th>
+            <th class="rowTitle">EMAIL</th>
+            <th class="rowTitle">PASSWORD</th>
+            <th class="rowTitle">VESSEL LIST</th>
+        </tr>
+    </thead>
+
+    <tbody id="cpnBody"></tbody>
+{#    <tbody>#}
+{#        {% for info in companyList %}#}
+{#        <tr>#}
+{#            <td class="rowInfo">{{ info.companyID }}</td>#}
+{#            <td class="rowInfo">{{ info.companyName }}</td>#}
+{#            <td class="rowInfo">{{ info.companyEmail }}</td>#}
+{#            <td class="rowInfo">{{ info.CPNpassword }}</td>#}
+{#            <td class="rowInfo" style="text-align: left">{{ info.vesselList }}</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+
+</table>
+
+<script>
+    const companyForm = document.getElementById('companyForm');
+    const companyList = document.getElementById('companyList');
+    const companyCells = companyList.getElementsByTagName('td');
+
+    const companyBody = document.getElementById('cpnBody');
+    const searchingRowsCpn = companyList.getElementsByTagName('tr');
+    const dataRow1Cpn = companyForm.getElementsByTagName('tr')[1];
+    const dataRow2Cpn = companyForm.getElementsByTagName('tr')[2];
+
+    let infoCpn1 = document.getElementById('{{ companyForm.cpnID.auto_id }}');
+    let infoCpn2 = document.getElementById('{{ companyForm.cpnName.auto_id }}');
+    let infoCpn3 = document.getElementById('{{ companyForm.cpnEmail.auto_id }}');
+    let infoCpn4 = document.getElementById('{{ companyForm.cpnPassword.auto_id }}');
+    let infoCpn5 = document.getElementById('{{ companyForm.cpnVesselList.auto_id }}');
+    {#let infoCpn1 = document.getElementById('{{ companyForm.companyID.auto_id }}');#}
+    {#let infoCpn2 = document.getElementById('{{ companyForm.companyName.auto_id }}');#}
+    {#let infoCpn3 = document.getElementById('{{ companyForm.companyEmail.auto_id }}');#}
+    {#let infoCpn4 = document.getElementById('{{ companyForm.CPNpassword.auto_id }}');#}
+    {#let infoCpn5 = document.getElementById('{{ companyForm.vesselList.auto_id }}');#}
+    var cpnUpdateID = "";
+    var cpnDeleteID = "";
+    cpnDisplayList();
+
+    function cpnDisplayList() {
+        let companyContent="";
+        {#var cpnList = {{ userList | safe }};#}
+        var cpnList = {{ companyList | safe }};
+        var cpnNumber = cpnList.length;
+        for(let i = 0;i < cpnNumber; i++) {
+            companyContent += '<tr>';
+            companyContent += '<td class="rowInfo cellBorder" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["userID"] + '</td>';
+            companyContent += '<td class="rowInfo cellBorder" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["companyName"] + '</td>';
+            companyContent += '<td class="rowInfo cellBorder" style="width: 6cm; font-weight: bold">' + cpnList[i]["fields"]["email"] + '</td>';
+            companyContent += '<td class="rowInfo cellBorder" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["rawPassword"] + '</td>';
+            companyContent += '<td class="rowInfo cellBorder" style="width: 24cm; font-weight: bold; text-align: left">' + cpnList[i]["fields"]["vesselList"] + '</td>';
+            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["companyID"] + '</td>';#}
+            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["companyName"] + '</td>';#}
+            {#companyContent += '<td class="rowInfo" style="width: 6cm; font-weight: bold">' + cpnList[i]["fields"]["companyEmail"] + '</td>';#}
+            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["CPNpassword"] + '</td>';#}
+            {#companyContent += '<td class="rowInfo" style="width: 24cm; font-weight: bold; text-align: left">' + cpnList[i]["fields"]["vesselList"] + '</td>';#}
+        }
+        companyBody.innerHTML = companyContent;
+    }
+    for (let i = 0; i < companyCells.length; i++) {
+        // Make function onclick for any cells
+        let cell = companyCells[i];
+        cell.onclick = function () {
+            // Get the row id where the cell exists
+            let rowId = this.parentNode.rowIndex;
+            let rowSelected = companyList.getElementsByTagName('tr')[rowId];
+            // Get data from the row as HTML style
+            var cpn1 = rowSelected.cells[0].innerHTML;
+            var cpn2 = rowSelected.cells[1].innerHTML;
+            var cpn3 = rowSelected.cells[2].innerHTML;
+            var cpn4 = rowSelected.cells[3].innerHTML;
+            var cpn5 = rowSelected.cells[4].innerHTML;
+            // Auto-fill the form with the cleaned data
+            infoCpn1.value = cpn1;
+            infoCpn2.value = cpn2;
+            infoCpn3.value = cpn3;
+            infoCpn4.value = cpn4;
+            infoCpn5.value = cpn5;
+            cpnUpdateID = cpn2;
+            cpnDeleteID = cpn2;
+        }
+    }
+
+    function saveCpn(){
+        if (cpnUpdateID===""){
+            alert("New company has just been added!")
+        } else {
+            alert("Information of company " + cpnUpdateID + " has been updated!");
+        }
+    }
+    function deleteCpn(){
+        if (cpnDeleteID===""){
+            alert("No companies in the current list with that name!");
+        } else {
+            alert("Company " + cpnDeleteID + " has been removed from the list!");
+        }
+    }
+</script>

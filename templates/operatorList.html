@@ -1,0 +1,116 @@
+<table id="operatorList" style="margin-left: 15%; margin-right: 15%" class="rowHoverStyle">
+{#    <col style="width:7cm">#}
+{#    <col style="width:7cm">#}
+{#    <col style="width:7cm">#}
+    {# Total: 40%; margin: 15% each side#}
+    <col style="width:12%">
+    <col style="width:16%">
+    <col style="width:12%">
+
+    <div style="text-align: center; margin-top: 1cm">
+        <formTitle>OPERATOR LIST</formTitle>
+    </div>
+
+    <thead>
+        <tr>
+            <th class="rowTitle">ID</th>
+            <th class="rowTitle">PASSWORD</th>
+            <th class="rowTitle">PERMISSION</th>
+        </tr>
+    </thead>
+
+    <tbody id="oprBody"></tbody>
+{#    <tbody>#}
+{#        {% for info in operatorList %}#}
+{#        <tr>#}
+{#            <td class="rowInfo">{{ info.operatorID }}</td>#}
+{#            <td class="rowInfo">{{ info.OPRpassword }}</td>#}
+{#            <td class="rowInfo">{{ info.permission }}</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+
+</table>
+
+<script>
+    const operatorForm = document.getElementById('operatorForm');
+    const operatorList = document.getElementById('operatorList');
+    const operatorCells = operatorList.getElementsByTagName('td');
+
+    const operatorBody = document.getElementById('oprBody');
+    const searchingRowsOpr = operatorList.getElementsByTagName('tr');
+    const dataRowOpr = operatorForm.getElementsByTagName('tr')[1];
+
+    {#let infoOpr1 = document.getElementById('oprUserID');#}
+    {#let infoOpr2 = document.getElementById('oprPassword');#}
+    {#let infoOpr3 = document.getElementById('oprPermission');#}
+    let infoOpr1 = document.getElementById('{{ operatorForm.oprID.auto_id }}');
+    let infoOpr2 = document.getElementById('{{ operatorForm.oprPassword.auto_id }}');
+    let infoOpr3 = document.getElementById('{{ operatorForm.oprPermission.auto_id }}');
+    {#let infoOpr1 = document.getElementById('{{ operatorForm.operatorID.auto_id }}');#}
+    {#let infoOpr2 = document.getElementById('{{ operatorForm.OPRpassword.auto_id }}');#}
+    {#let infoOpr3 = document.getElementById('{{ operatorForm.permission.auto_id }}');#}
+    let info1 = dataRowOpr.cells[0].innerHTML;
+    let info2 = dataRowOpr.cells[1].innerHTML;
+    let info3 = dataRowOpr.cells[2].innerHTML;
+    var oprUpdateID = "";
+    var oprDeleteID = "";
+    oprDisplayList();
+
+    function oprDisplayList() {
+        let operatorContent = "";
+        {#var oprList = {{ userList | safe }};#}
+        var oprList = {{ operatorList | safe }};
+        var oprNumber = oprList.length;
+        for (let i = 0; i < oprNumber; i++) {
+            operatorContent += '<tr>';
+            operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["userID"] + '</td>';
+            operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["rawPassword"] + '</td>';
+            {#operatorContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["operatorID"] + '</td>';#}
+            {#operatorContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["OPRpassword"] + '</td>';#}
+            if (oprList[i]["fields"]["permission"] === "Read + Modify") {
+                permissionColored = '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold; color: red">' + oprList[i]["fields"]["permission"] + '</td>';
+            } else {
+                permissionColored = '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold; color: gray">' + oprList[i]["fields"]["permission"] + '</td>';
+            }
+            operatorContent += permissionColored;
+            operatorContent += '</tr>';
+        }
+        operatorBody.innerHTML = operatorContent;
+    }
+    for (let i = 0; i < operatorCells.length; i++) {
+        // Make function onclick for any cells
+        let cell = operatorCells[i];
+        cell.onclick = function () {
+            // Get the row id where the cell exists
+            let rowId = this.parentNode.rowIndex;
+            let rowSelected = operatorList.getElementsByTagName('tr')[rowId];
+            // Get data from the row as HTML style
+            var opr1 = rowSelected.cells[0].innerHTML;
+            var opr2 = rowSelected.cells[1].innerHTML;
+            var opr3 = rowSelected.cells[2].innerHTML;
+            // Auto-fill the form with the cleaned data
+            infoOpr1.value = opr1;
+            infoOpr2.value = opr2;
+            infoOpr3.value = opr3;
+            oprUpdateID = opr1;
+            oprDeleteID = opr1;
+        }
+    }
+
+    function saveOpr(){
+        if (oprUpdateID===""){
+            alert("New operator has just been created!")
+        } else {
+            alert("OperatorID " + oprUpdateID + " has been updated!");
+        }
+    }
+    function deleteOpr(){
+        if (oprDeleteID===""){
+            alert("No operators in the current list with that ID!")
+        } else {
+            alert("OperatorID " + oprDeleteID + " has been deleted!");
+        }
+    }
+
+</script>

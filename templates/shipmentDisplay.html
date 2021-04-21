@@ -1,0 +1,76 @@
+{% load parameter_replacing %}
+
+<div style="text-align: center">
+    <formTitle>SHIPMENT LIST</formTitle>
+</div>
+
+<table class="rowHoverStyle" style="margin-left: 15%; margin-right: auto">
+    <div>
+        <thead>
+        <tr>
+            <th class="rowTitle">COMPANY</th>
+            <th class="rowTitle">VESSEL</th>
+            <th class="rowTitle">DOC</th>
+            <th class="rowTitle">ODR</th>
+            <th class="rowTitle">SUPPLIER</th>
+            <th class="rowTitle">QTY</th>
+            <th class="rowTitle">UNIT</th>
+            <th class="rowTitle">SIZE</th>
+            <th class="rowTitle">WEIGHT</th>
+            <th class="rowTitle">IN</th>
+            <th class="rowTitle">W/H</th>
+            <th class="rowTitle">BY</th>
+            <th class="rowTitle">BLNO</th>
+            <th class="rowTitle">PORT</th>
+            <th class="rowTitle">OUT</th>
+            <th class="rowTitle">REMARK</th>
+            <th class="rowTitle">JOB NO</th>
+    {#        <th style="text-align: center; background-color: lightyellow"><columnTitle>UserID</columnTitle></th>#}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for info in shipmentDisplay %}
+        <tr>
+            <td class="cellBorder">{{info.company}}</td>
+            <td class="cellBorder">{{info.vessel}}</td>
+            <td class="cellBorder">{{info.docs}}</td>
+            <td class="cellBorder">{{info.odr}}</td>
+            <td class="cellBorder">{{info.supplier}}</td>
+            <td class="cellBorder">{{info.quanty}}</td>
+            <td class="cellBorder">{{info.unit}}</td>
+            <td class="cellBorder">{{info.size}}</td>
+            <td class="cellBorder">{{info.weight}}</td>
+            <td class="cellBorder">{{info.in_date}}</td>
+            <td class="cellBorder">{{info.warehouse}}</td>
+            <td class="cellBorder">{{info.by}}</td>
+            <td class="cellBorder">{{info.BLno}}</td>
+            <td class="cellBorder">{{info.port}}</td>
+            <td class="cellBorder">{{info.out_date}}</td>
+            <td class="cellBorder">{{info.remark}}</td>
+            <td class="cellBorder">{{info.job_number}}</td>
+    {#        <td>{{userChange}}</td>#}
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </div>
+
+</table>
+
+<div style="text-align: right; margin-right: 5cm">
+    {% if shipmentDisplay.has_previous %}
+        <a href="?{% parameter_replacing page=1 %}">First</a>
+        {% if shipmentDisplay.previous_page_number != 1 %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.previous_page_number %}">Previous</a>
+        {% endif %}
+    {% endif %}
+    {{ shipmentDisplay.number }}<b>/</b>{{ shipmentDisplay.paginator.num_pages }}
+    {% if shipmentDisplay.has_next %}
+        {% if shipmentDisplay.next_page_number != shipmentDisplay.paginator.num_pages %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% parameter_replacing page=shipmentDisplay.paginator.num_pages %}">Last</a>
+    {% endif %}
+
+</div>

@@ -1,0 +1,117 @@
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table style="margin-left: auto; margin-right: auto">
+        <col style="width: 7cm">
+        <col style="width: 7cm">
+        <col style="width: 7cm">
+        <col style="width: 7cm">
+
+        <div style="text-align: center">
+            <formTitle>ADD/UPDATE NEW SHIPMENT</formTitle>
+        </div>
+
+        <tbody>
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.company.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.vessel.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.docs.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.odr.label_tag }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center">{{ shipmentRegister.company }}</td>
+                <td style="text-align: center">{{ shipmentRegister.vessel }}</td>
+                <td style="text-align: center">{{ shipmentRegister.docs }}</td>
+                <td style="text-align: center">{{ shipmentRegister.odr }}</td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.supplier.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.quanty.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.unit.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.size.label_tag }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center">{{ shipmentRegister.supplier }}</td>
+                <td style="text-align: center">{{ shipmentRegister.quanty }}</td>
+                <td style="text-align: center">{{ shipmentRegister.unit }}</td>
+                <td style="text-align: center">{{ shipmentRegister.size }}</td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.weight.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.in_date.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.warehouse.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.by.label_tag }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center">{{ shipmentRegister.weight }}</td>
+                <td style="text-align: center">{{ shipmentRegister.in_date }}</td>
+                <td style="text-align: center">{{ shipmentRegister.warehouse }}</td>
+                <td style="text-align: center">{{ shipmentRegister.by }}</td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.BLno.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.port.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.out_date.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.remark.label_tag }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center">{{ shipmentRegister.BLno }}</td>
+                <td style="text-align: center">{{ shipmentRegister.port }}</td>
+                <td style="text-align: center">{{ shipmentRegister.out_date }}</td>
+                <td style="text-align: center">{{ shipmentRegister.remark }}</td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.division.label_tag }}</td>
+                <td class="rowTitle">{{ shipmentRegister.job_number.label_tag }}</td>
+                <td class="rowTitle" colspan="2">{{ shipmentRegister.image.label_tag }}</td>
+            </tr>
+            <tr>
+                <td style="text-align: center">{{ shipmentRegister.division}}</td>
+                <td style="text-align: center">{{ shipmentRegister.job_number}}</td>
+                <td>
+                    <div style="vertical-align: top; margin-left: 2cm">
+                        {{ shipmentRegister.image}}
+                    </div>
+                    <div style="vertical-align: middle; margin-left: 2cm">
+                        {{ shipmentRegister.image1}}
+                    </div>
+                    <div style="vertical-align: bottom; margin-left: 2cm">
+                        {{ shipmentRegister.image2}}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle">{{ shipmentRegister.pdf_file.label_tag }}</td>
+                <td class="rowTitle"></td>
+                <td class="rowTitle"></td>
+                <td class="rowTitle"></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="margin-left: 1cm">
+                        {{ shipmentRegister.pdf_file }}
+                    </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div style="text-align: right; margin-right: 1cm">
+                        <button type="submit" id="addShipment" name="addShipment" onclick="addShipmentOrder()" class="buttonAccept">Add/Update</button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4">{{ shipmentRegister.messages }}</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</form>

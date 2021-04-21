@@ -1,0 +1,12 @@
+{% extends "body.html" %}
+
+{% block bodyContent %}
+    <div style="text-align: center">
+        <h3>LOGIN SUCCEEDED!</h3>
+
+        <p>Welcome, {{ staffExist.userID }}</p>
+        <p>To continue, please <a href="{% url "mainPage" %}">click here</a></p>
+
+    </div>
+
+{% endblock bodyContent %}

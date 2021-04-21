@@ -1,0 +1,26 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
+<!-- Title of the page -->
+<title>SmartIndo - sharing economy solution</title>
+<!-- Make container for logo and navigation -->
+<div class="container-fluid headerPart">
+    <div class="d-flex justify-content-around"> <!-- Make row for flex items -->
+        <div>
+            <a href="{% url "frontpage" %}"><img class="logoHeader" src={% static "images/logo.png" %} alt="SmartIndoSystem"></a>
+        </div>
+        <div class="flex-grow-1" style="padding-right: 3cm">
+            <!-- Navigation bar on the header, expanding when the screen is large, justifying to right -->
+            <nav class="navbar navbar-expand-lg" style="justify-content: flex-end">
+            <!-- Add links to navbar -->
+                <ul class="nav">
+                    {% if request.user.is_authenticated %}
+                        {% include "navigationLogged.html" %}
+                    {% else %}
+                        {% include "navigationUnlogged.html" %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
