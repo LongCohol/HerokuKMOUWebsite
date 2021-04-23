@@ -97,7 +97,7 @@ class Shipment(models.Model):
     by = models.CharField(blank=True, db_column="by1", choices=BY, max_length=50, verbose_name="BY")
     BLno = models.CharField(blank=True, db_column="blno", max_length=50, verbose_name="BLNO")
     docs = models.TextField(blank=True, db_column="doc", max_length=500, verbose_name="DOC")
-    odr = models.TextField(blank=False, db_column="odr", max_length=100, verbose_name="ODR")
+    odr = models.TextField(blank=True, db_column="odr", max_length=100, verbose_name="ODR")
     supplier = models.TextField(blank=True, db_column="supplier", max_length=100, verbose_name="SUPPLIER")
     quanty = models.CharField(blank=True, db_column="qty", max_length=10, verbose_name="QTY")
     unit = models.CharField(blank=True, db_column="unit", max_length=10, verbose_name="UNIT")
