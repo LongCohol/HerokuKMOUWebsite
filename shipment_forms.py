@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 from Shipment.models import Shipment
 
@@ -57,7 +59,7 @@ FLAG = {
 
 
 class ShipmentRegistration(forms.ModelForm):
-    in_date = forms.DateField(required=False, input_formats=['%Y%m%d'], widget=forms.DateInput(format='%Y%m%d'), label="IN")
+    in_date = forms.DateField(required=False, initial=date.today(), input_formats=['%Y%m%d'], widget=forms.DateInput(format='%Y%m%d'), label="IN")
     out_date = forms.DateField(required=False, input_formats=['%Y%m%d'], widget=forms.DateInput(format='%Y%m%d'), label="OUT")
 
     class Meta:
@@ -112,7 +114,7 @@ class ShipmentModification(forms.ModelForm):
         self.fields['warehouse'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'
         self.fields['job_number'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'
         self.fields['division'].widget.attrs['style'] = 'width: 2cm; height: 0.8cm'
-        self.fields['flag_status'].widget.attrs['style'] = 'width: 2cm; height: 0.8cm'
+        self.fields['flag_status'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'
         self.fields['in_dateM'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'
         self.fields['out_dateM'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'
         self.fields['port'].widget.attrs['style'] = 'width: 5cm; height: 0.8cm'

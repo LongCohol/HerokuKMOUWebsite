@@ -1,5 +1,5 @@
 <form method="get">
-    <table style="margin-left: auto; margin-right: auto">
+    <table id="shipmentFilter" style="margin-left: auto; margin-right: auto">
         <col style="width: 6cm">
         <col style="width: 6cm">
         <col style="width: 6cm">
@@ -14,26 +14,50 @@
 
         <tr>
             <td class="rowTitle">{{ shipmentFilter.form.in_date_range.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.companyF.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.supplierF.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.vesselF.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.warehouseF.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.job_numberF.label_tag }}</td>
+{#            <td class="rowTitle">{{ shipmentFilter.form.companyF.label_tag }}</td>#}
+{#            <td class="rowTitle">{{ shipmentFilter.form.supplierF.label_tag }}</td>#}
+{#            <td class="rowTitle">{{ shipmentFilter.form.vesselF.label_tag }}</td>#}
+{#            <td class="rowTitle">{{ shipmentFilter.form.warehouseF.label_tag }}</td>#}
+{#            <td class="rowTitle">{{ shipmentFilter.form.job_numberF.label_tag }}</td>#}
+            <td class="rowTitle">{{ shipmentFilter.form.company.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentFilter.form.supplier.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentFilter.form.vessel.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentFilter.form.warehouse.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentFilter.form.job_number.label_tag }}</td>
         </tr>
         <tr style="height: 1.2cm">
             <td style="text-align: center">{{ shipmentFilter.form.in_date_range }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.companyF }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.supplierF }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.vesselF }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.warehouseF }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.job_numberF }}</td>
+{#            <td style="text-align: center">{{ shipmentFilter.form.companyF }}</td>#}
+{#            <td style="text-align: center">{{ shipmentFilter.form.supplierF }}</td>#}
+{#            <td style="text-align: center">#}
+{#                <input list="vesselsF" type="text" id="pickVesselF" {{ shipmentFilter.form.vesselF }}>#}
+{#                <datalist id="vesselsF">#}
+{#                    {% for vess in allVessels %}#}
+{#                        <option value="{{ vess }}">#}
+{#                    {% endfor %}#}
+{#                </datalist>#}
+{#            </td>#}
+{#            <td style="text-align: center">{{ shipmentFilter.form.warehouseF }}</td>#}
+{#            <td style="text-align: center">{{ shipmentFilter.form.job_numberF }}</td>#}
+            <td style="text-align: center">{{ shipmentFilter.form.company }}</td>
+            <td style="text-align: center">{{ shipmentFilter.form.supplier }}</td>
+            <td style="text-align: center">
+                <input list="vesselsF" type="text" id="pickVesselF" {{ shipmentFilter.form.vessel }}>
+                <datalist id="vesselsF">
+                    {% for vess in allVessels %}
+                        <option value="{{ vess }}">
+                    {% endfor %}
+                </datalist>
+            </td>
+            <td style="text-align: center">{{ shipmentFilter.form.warehouse }}</td>
+            <td style="text-align: center">{{ shipmentFilter.form.job_number }}</td>
         </tr>
 
         <tr>
             <td colspan="6">
                 <div style="text-align: right; margin-right: 1cm">
                     <button type="submit" id="filterShipment" name="filterShipment" onclick="filterShipmentOrder()" class="buttonAccept">Search</button>
-{#                    <button type="submit" id="resetFilter" name="resetFilter" onclick="resetFilterShipmentOrder()" class="buttonOkay">Reset</button>#}
+{#                    <button type="submit" id="resetFilter" name="resetFilter" onclick="resetFilterShipmentOrder()" class="buttonOkay">Reset Filter</button>#}
                 </div>
             </td>
         </tr>

@@ -18,18 +18,17 @@
             </tr>
             <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.company }}</td>
-{#                <td style="text-align: center" list="vessels">{{ shipmentRegister.vessel }}</td>#}
                 <td style="text-align: center">
-                    <input list="vessels" type="text" id="pickVessel" oninput="pickVessel()" {{ shipmentRegister.vessel }}>
+                    <input list="vessels" type="text" id="pickVessel" {{ shipmentRegister.vessel }}>
+                    <datalist id="vessels">
+                        {% for vess in allVessels %}
+                            <option value="{{ vess }}">
+                        {% endfor %}
+                    </datalist>
                 </td>
-
-                <datalist id="vessels">
-                    {% for vess in allVessels %}
-                        <option value="{{ vess }}">
-                    {% endfor %}
-                </datalist>
                 <td style="text-align: center">{{ shipmentRegister.docs }}</td>
                 <td style="text-align: center">{{ shipmentRegister.odr }}</td>
+
             </tr>
 
             <tr>
@@ -142,6 +141,25 @@
 </form>
 
 <script>
+    function isUpperCase(str) {
+        return str == str.toUpperCase() && str != str.toLowerCase();
+    }
+
+    let companySmartCell = document.getElementById('{{ shipmentRegister.company.auto_id }}');
+    let vesselListCell = document.getElementById('pickVessel');
+    let vesselKey = '{{ vessel_key }}';
+    vesselListCell.onchange = function () {
+        var companyName = "";
+        var idx = vesselKey.indexOf(vesselListCell.value);
+        var idxLength = vesselListCell.value.length;
+        for (let i = idx+idxLength+14; i<vesselKey.length; i++) {
+            if (isUpperCase(vesselKey[i])) {
+                companyName += vesselKey[i];
+            } else break;
+        }
+        companySmartCell.value = companyName;
+    }
+
     function clearImage(){
         document.getElementById('{{shipmentRegister.image.auto_id}}').value= null;
     }

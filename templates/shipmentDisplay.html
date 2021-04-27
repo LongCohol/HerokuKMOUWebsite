@@ -24,6 +24,7 @@
 </div>
 
 <form method="post">{% csrf_token %}
+{#<table id="shipmentTable" class="rowHoverStyle table table-border table-hover" style="margin-left: 2cm">#}
 <table id="shipmentTable" class="rowHoverStyle" style="margin-left: 2cm">
     <col style="width: 1cm">
     <col style="width: 2.5cm">
@@ -145,25 +146,6 @@
         {% endif %}
         <td class="cellBorder">{{ info.insert_org }}</td>
         <td class="cellBorder">{{ info.correct_org }}</td>
-
-{#            <td class="cellBorder">{{info.company}}</td>#}
-{#            <td class="cellBorder">{{info.vessel}}</td>#}
-{#            <td class="cellBorder">{{info.docs}}</td>#}
-{#            <td class="cellBorder">{{info.odr}}</td>#}
-{#            <td class="cellBorder">{{info.supplier}}</td>#}
-{#            <td class="cellBorder">{{info.quanty}}</td>#}
-{#            <td class="cellBorder">{{info.unit}}</td>#}
-{#            <td class="cellBorder">{{info.size}}</td>#}
-{#            <td class="cellBorder">{{info.weight}}</td>#}
-{#            <td class="cellBorder">{{info.in_date}}</td>#}
-{#            <td class="cellBorder">{{info.warehouse}}</td>#}
-{#            <td class="cellBorder">{{info.by}}</td>#}
-{#            <td class="cellBorder">{{info.BLno}}</td>#}
-{#            <td class="cellBorder">{{info.port}}</td>#}
-{#            <td class="cellBorder">{{info.out_date}}</td>#}
-{#            <td class="cellBorder">{{info.remark}}</td>#}
-{#            <td class="cellBorder">{{info.job_number}}</td>#}
-{#        <td>{{userChange}}</td>#}
     </tr>
     {% endfor %}
 
@@ -171,7 +153,6 @@
 
 </table>
 </form>
-
 
 <div style="text-align: right; margin-right: 5cm">
     {% if shipmentDisplay.has_previous %}
@@ -282,11 +263,19 @@
             infoShp17.value = shp17;
         }
     }
+
+    function resetFilterShipmentOrder() {
+        let filterRows = document.getElementById('shipmentFilter').getElementsByTagName('tr');
+        document.getElementById('{{ shipmentFilter.form.in_date_range.auto_id }}').value = "";
+        document.getElementById('{{ shipmentFilter.form.company.auto_id }}').value = "";
+        document.getElementById('{{ shipmentFilter.form.supplier.auto_id }}').value = "";
+        document.getElementById('{{ shipmentFilter.form.vessel.auto_id }}').value = "";
+        document.getElementById('{{ shipmentFilter.form.warehouse.auto_id }}').value = "";
+        document.getElementById('{{ shipmentFilter.form.job_number.auto_id }}').value = "";
+        for (let i = 0; i < 5; i++) {
+            alert(filterRows[1].children[i].value);
+            filterRows[1].cells[i].value = "";
+        }
+        location.href = "http://127.0.0.1:8000/main_page_staff/";
+    }
 </script>
-{#<script language="javascript">#}
-{#    $(document).ready( function () {#}
-{#        $('#shipmentTable').DataTable({#}
-{##}
-{#        });#}
-{#    } );#}
-{#</script>#}

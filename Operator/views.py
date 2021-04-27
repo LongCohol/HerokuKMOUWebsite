@@ -37,6 +37,8 @@ for account in accounts:
 
 CONTEXT["allCompanies"] = COMP_LIST
 CONTEXT["allVessels"] = VESS_LIST
+VESSEL_KEY_JS = json.dumps(CONTEXT)
+CONTEXT["vessel_key"] = VESSEL_KEY_JS
 
 
 def adminView(request):
@@ -268,54 +270,54 @@ def mainView1(request):
                 CONTEXT["shipmentRegister"] = ShipmentRegistration()
                 return redirect('mainPage1')
 
-        if "changeShipment" in request.POST:
-            modified_company = request.POST['company']
-            modified_vessel = request.POST['vessel']
-            modified_docs = request.POST['docs']
-            modified_odr = request.POST['odr']
-            modified_supplier = request.POST['supplier']
-            modified_quanty = request.POST['quanty']
-            modified_unit = request.POST['unit']
-            modified_size = request.POST['size']
-            modified_weight = request.POST['weight']
-            modified_in_date = request.POST['in_date']
-            modified_warehouse = request.POST['warehouse']
-            modified_by = request.POST['by']
-            modified_BLno = request.POST['BLno']
-            modified_port = request.POST['port']
-            modified_out_date = request.POST['out_date']
-            modified_remark = request.POST['remark']
-            modified_division = request.POST['division']
-            modified_job_number = request.POST['job_number']
-            modified_image = request.POST['image']
-            modified_image1 = request.POST['image1']
-            modified_image2 = request.POST['image2']
-            modified_pdf_file = request.POST['pdf_file']
-
-            # check the shipment to update
-            shipment = Shipment.objects.get(company__exact=modified_company, vessel__exact=modified_vessel, supplier__exact=modified_supplier,
-                                               division__exact=modified_division)
-            shipment.docs = modified_docs
-            shipment.odr = modified_odr
-            shipment.quanty = modified_quanty
-            shipment.unit = modified_unit
-            shipment.size = modified_size
-            shipment.weight = modified_weight
-            shipment.in_date = modified_in_date
-            shipment.warehouse = modified_warehouse
-            shipment.by = modified_by
-            shipment.BLno = modified_BLno
-            shipment.port = modified_port
-            shipment.out_date = modified_out_date
-            shipment.remark = modified_remark
-            shipment.job_number = modified_job_number
-            shipment.image = modified_image
-            shipment.image1 = modified_image1
-            shipment.image2 = modified_image2
-            shipment.pdf_file = modified_pdf_file
-            shipment.correct_org = CONTEXT["staffExist"].userID
-
-            shipment.save()
+        # if "changeShipment" in request.POST:
+        #     modified_company = request.POST['company']
+        #     modified_vessel = request.POST['vessel']
+        #     modified_docs = request.POST['docs']
+        #     modified_odr = request.POST['odr']
+        #     modified_supplier = request.POST['supplier']
+        #     modified_quanty = request.POST['quanty']
+        #     modified_unit = request.POST['unit']
+        #     modified_size = request.POST['size']
+        #     modified_weight = request.POST['weight']
+        #     modified_in_date = request.POST['in_date']
+        #     modified_warehouse = request.POST['warehouse']
+        #     modified_by = request.POST['by']
+        #     modified_BLno = request.POST['BLno']
+        #     modified_port = request.POST['port']
+        #     modified_out_date = request.POST['out_date']
+        #     modified_remark = request.POST['remark']
+        #     modified_division = request.POST['division']
+        #     modified_job_number = request.POST['job_number']
+        #     modified_image = request.POST['image']
+        #     modified_image1 = request.POST['image1']
+        #     modified_image2 = request.POST['image2']
+        #     modified_pdf_file = request.POST['pdf_file']
+        #
+        #     # check the shipment to update
+        #     shipment = Shipment.objects.get(company__exact=modified_company, vessel__exact=modified_vessel, supplier__exact=modified_supplier,
+        #                                        division__exact=modified_division)
+        #     shipment.docs = modified_docs
+        #     shipment.odr = modified_odr
+        #     shipment.quanty = modified_quanty
+        #     shipment.unit = modified_unit
+        #     shipment.size = modified_size
+        #     shipment.weight = modified_weight
+        #     shipment.in_date = modified_in_date
+        #     shipment.warehouse = modified_warehouse
+        #     shipment.by = modified_by
+        #     shipment.BLno = modified_BLno
+        #     shipment.port = modified_port
+        #     shipment.out_date = modified_out_date
+        #     shipment.remark = modified_remark
+        #     shipment.job_number = modified_job_number
+        #     shipment.image = modified_image
+        #     shipment.image1 = modified_image1
+        #     shipment.image2 = modified_image2
+        #     shipment.pdf_file = modified_pdf_file
+        #     shipment.correct_org = CONTEXT["staffExist"].userID
+        #
+        #     shipment.save()
 
         if "addShipment_m" in request.POST:
             # load the form from the CONTEXT
@@ -386,6 +388,10 @@ def mainView1(request):
                     id_shipmentdeleted = int(id_shipmentdeleted)
                     Shipment.objects.filter(number__exact=id_shipmentdeleted).delete()
 
+        if "resetFilter" in request.POST:
+            CONTEXT["shipmentFilter"] = ShipmentFilter()
+            return redirect("mainPage1")
+
     else:
         CONTEXT["shipmentRegister"] = ShipmentRegistration()
         CONTEXT["shipmentModify"] = ShipmentModification()
@@ -393,10 +399,22 @@ def mainView1(request):
     shipmentfilterview_result = shipmentFilterView(request)
     CONTEXT.update(shipmentfilterview_result)
 
-    if useragent.is_pc:
-        return render(request, "mainPage1.html", CONTEXT)
+    if useragent.is_mobile:
+        return render(request, "mainPage1-mobile.html", CONTEXT)
     else:
-        return render(request, "mobilePage.html", CONTEXT)
+        return render(request, "mainPage1.html", CONTEXT)
+
+
 def mainView2(request):
+    useragent = get_user_agent(request)
+    context = {}
+
     shipmentfilterview_result = shipmentFilterView(request)
-    return render(request, "mainPage2.html", shipmentfilterview_result)
+    context["allVessels"] = VESS_LIST
+    context["vessel_key"] = VESSEL_KEY_JS
+    context.update(shipmentfilterview_result)
+
+    if useragent.is_mobile:
+        return render(request, "mainPage2-mobile.html", context)
+    else:
+        return render(request, "mainPage2.html", context)

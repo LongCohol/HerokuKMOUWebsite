@@ -20,17 +20,6 @@
     </thead>
 
     <tbody id="cpnBody"></tbody>
-{#    <tbody>#}
-{#        {% for info in companyList %}#}
-{#        <tr>#}
-{#            <td class="rowInfo">{{ info.companyID }}</td>#}
-{#            <td class="rowInfo">{{ info.companyName }}</td>#}
-{#            <td class="rowInfo">{{ info.companyEmail }}</td>#}
-{#            <td class="rowInfo">{{ info.CPNpassword }}</td>#}
-{#            <td class="rowInfo" style="text-align: left">{{ info.vesselList }}</td>#}
-{#        </tr>#}
-{#        {% endfor %}#}
-{#    </tbody>#}
 
 </table>
 
@@ -49,18 +38,12 @@
     let infoCpn3 = document.getElementById('{{ companyForm.cpnEmail.auto_id }}');
     let infoCpn4 = document.getElementById('{{ companyForm.cpnPassword.auto_id }}');
     let infoCpn5 = document.getElementById('{{ companyForm.cpnVesselList.auto_id }}');
-    {#let infoCpn1 = document.getElementById('{{ companyForm.companyID.auto_id }}');#}
-    {#let infoCpn2 = document.getElementById('{{ companyForm.companyName.auto_id }}');#}
-    {#let infoCpn3 = document.getElementById('{{ companyForm.companyEmail.auto_id }}');#}
-    {#let infoCpn4 = document.getElementById('{{ companyForm.CPNpassword.auto_id }}');#}
-    {#let infoCpn5 = document.getElementById('{{ companyForm.vesselList.auto_id }}');#}
     var cpnUpdateID = "";
     var cpnDeleteID = "";
     cpnDisplayList();
 
     function cpnDisplayList() {
         let companyContent="";
-        {#var cpnList = {{ userList | safe }};#}
         var cpnList = {{ companyList | safe }};
         var cpnNumber = cpnList.length;
         for(let i = 0;i < cpnNumber; i++) {
@@ -70,11 +53,6 @@
             companyContent += '<td class="rowInfo cellBorder" style="width: 6cm; font-weight: bold">' + cpnList[i]["fields"]["email"] + '</td>';
             companyContent += '<td class="rowInfo cellBorder" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["rawPassword"] + '</td>';
             companyContent += '<td class="rowInfo cellBorder" style="width: 24cm; font-weight: bold; text-align: left">' + cpnList[i]["fields"]["vesselList"] + '</td>';
-            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["companyID"] + '</td>';#}
-            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["companyName"] + '</td>';#}
-            {#companyContent += '<td class="rowInfo" style="width: 6cm; font-weight: bold">' + cpnList[i]["fields"]["companyEmail"] + '</td>';#}
-            {#companyContent += '<td class="rowInfo" style="width: 4cm; font-weight: bold">' + cpnList[i]["fields"]["CPNpassword"] + '</td>';#}
-            {#companyContent += '<td class="rowInfo" style="width: 24cm; font-weight: bold; text-align: left">' + cpnList[i]["fields"]["vesselList"] + '</td>';#}
         }
         companyBody.innerHTML = companyContent;
     }

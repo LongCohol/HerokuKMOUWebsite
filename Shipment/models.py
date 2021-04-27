@@ -23,6 +23,7 @@ COMPANY = {
     ('CMSHIP',          'CMSHIP'),
     ('DAN MO',          'DAN MO'),
     ('DORVAL',          'DORVAL'),
+    ('JW',              'JW'),
     ('EUCO',            'EUCO'),
     ('FORTUNE WILL',    'FORTUNE WILL'),
     ('GLOVIS',          'GLOVIS'),
@@ -85,8 +86,6 @@ def barcode_path(instance, filename):
 
 
 class Shipment(models.Model):
-
-
     number = models.BigAutoField(primary_key=True, db_column="no")
     barcode = models.ImageField(upload_to=barcode_path, db_column="barcode", blank=True, verbose_name="Barcode Shipment",
                                 storage=OverrideExisting())
@@ -144,16 +143,22 @@ class Shipment(models.Model):
 
 
 class ShipmentFilter(django_filters.FilterSet):
-    companyF = django_filters.CharFilter(label="Company", lookup_expr="icontains")
-    supplierF = django_filters.CharFilter(label="Supplier", lookup_expr="icontains")
-    vesselF = django_filters.CharFilter(label="Vessel", lookup_expr="icontains")
-    warehouseF = django_filters.CharFilter(label="Warehouse", lookup_expr="icontains")
-    job_numberF = django_filters.CharFilter(label="JOB.NO", lookup_expr="icontains")
+    # companyF = django_filters.CharFilter(label="Company", lookup_expr="icontains")
+    # supplierF = django_filters.CharFilter(label="Supplier", lookup_expr="icontains")
+    # vesselF = django_filters.CharFilter(label="Vessel", lookup_expr="icontains")
+    # warehouseF = django_filters.CharFilter(label="Warehouse", lookup_expr="icontains")
+    # job_numberF = django_filters.CharFilter(label="JOB.NO", lookup_expr="icontains")
+    company = django_filters.CharFilter(label="Company", lookup_expr="icontains")
+    supplier = django_filters.CharFilter(label="Supplier", lookup_expr="icontains")
+    vessel = django_filters.CharFilter(label="Vessel", lookup_expr="icontains")
+    warehouse = django_filters.CharFilter(label="Warehouse", lookup_expr="icontains")
+    job_number = django_filters.CharFilter(label="JOB.NO", lookup_expr="icontains")
     in_date_range = django_filters.DateFromToRangeFilter(field_name='in_date', widget=RangeWidget(attrs={'placeholder': 'YYYYMMDD'}))
 
     class Meta:
         model = Shipment
-        fields = ['companyF', 'supplierF', 'vesselF', 'warehouseF', 'job_numberF', 'in_date_range']
+        # fields = ['companyF', 'supplierF', 'vesselF', 'warehouseF', 'job_numberF', 'in_date_range']
+        fields = ['company', 'supplier', 'vessel', 'warehouse', 'job_number', 'in_date_range', 'flag_status']
 
     def __init__(self, *args, **kwargs):
         # Set up dimension for fields with CSS style
@@ -161,9 +166,15 @@ class ShipmentFilter(django_filters.FilterSet):
         self.form.fields['in_date_range'].fields[0].input_formats = ['%Y%m%d']
         self.form.fields['in_date_range'].fields[1].input_formats = ['%Y%m%d']
         self.form.fields['in_date_range'].widget.attrs['style'] = 'width: 2.5cm'
-        self.form.fields['companyF'].widget.attrs['style'] = 'width: 5cm'
-        self.form.fields['supplierF'].widget.attrs['style'] = 'width: 5cm'
-        self.form.fields['vesselF'].widget.attrs['style'] = 'width: 5cm'
-        self.form.fields['warehouseF'].widget.attrs['style'] = 'width: 5cm'
-        self.form.fields['job_numberF'].widget.attrs['style'] = 'width: 5cm'
+        # self.form.fields['companyF'].widget.attrs['style'] = 'width: 5cm'
+        # self.form.fields['supplierF'].widget.attrs['style'] = 'width: 5cm'
+        # self.form.fields['vesselF'].widget.attrs['style'] = 'width: 5cm'
+        # self.form.fields['warehouseF'].widget.attrs['style'] = 'width: 5cm'
+        # self.form.fields['job_numberF'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['company'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['supplier'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['vessel'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['warehouse'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['job_number'].widget.attrs['style'] = 'width: 5cm'
+        self.form.fields['flag_status'].widget.attrs['style'] = 'width: 5cm'
 

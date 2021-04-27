@@ -20,15 +20,6 @@
     </thead>
 
     <tbody id="oprBody"></tbody>
-{#    <tbody>#}
-{#        {% for info in operatorList %}#}
-{#        <tr>#}
-{#            <td class="rowInfo">{{ info.operatorID }}</td>#}
-{#            <td class="rowInfo">{{ info.OPRpassword }}</td>#}
-{#            <td class="rowInfo">{{ info.permission }}</td>#}
-{#        </tr>#}
-{#        {% endfor %}#}
-{#    </tbody>#}
 
 </table>
 
@@ -41,15 +32,9 @@
     const searchingRowsOpr = operatorList.getElementsByTagName('tr');
     const dataRowOpr = operatorForm.getElementsByTagName('tr')[1];
 
-    {#let infoOpr1 = document.getElementById('oprUserID');#}
-    {#let infoOpr2 = document.getElementById('oprPassword');#}
-    {#let infoOpr3 = document.getElementById('oprPermission');#}
     let infoOpr1 = document.getElementById('{{ operatorForm.oprID.auto_id }}');
     let infoOpr2 = document.getElementById('{{ operatorForm.oprPassword.auto_id }}');
     let infoOpr3 = document.getElementById('{{ operatorForm.oprPermission.auto_id }}');
-    {#let infoOpr1 = document.getElementById('{{ operatorForm.operatorID.auto_id }}');#}
-    {#let infoOpr2 = document.getElementById('{{ operatorForm.OPRpassword.auto_id }}');#}
-    {#let infoOpr3 = document.getElementById('{{ operatorForm.permission.auto_id }}');#}
     let info1 = dataRowOpr.cells[0].innerHTML;
     let info2 = dataRowOpr.cells[1].innerHTML;
     let info3 = dataRowOpr.cells[2].innerHTML;
@@ -59,15 +44,12 @@
 
     function oprDisplayList() {
         let operatorContent = "";
-        {#var oprList = {{ userList | safe }};#}
         var oprList = {{ operatorList | safe }};
         var oprNumber = oprList.length;
         for (let i = 0; i < oprNumber; i++) {
             operatorContent += '<tr>';
             operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["userID"] + '</td>';
             operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["rawPassword"] + '</td>';
-            {#operatorContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["operatorID"] + '</td>';#}
-            {#operatorContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["OPRpassword"] + '</td>';#}
             if (oprList[i]["fields"]["permission"] === "Read + Modify") {
                 permissionColored = '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold; color: red">' + oprList[i]["fields"]["permission"] + '</td>';
             } else {

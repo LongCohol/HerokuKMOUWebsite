@@ -1,0 +1,148 @@
+{% extends "body.html" %}
+{% load parameter_replacing %}
+{% load static %}
+
+{% block bodyContent %}
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Data Tables</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<form method="get">
+<div class="container-fluid col-11" style="padding: 10px 10px; padding-right: 15px;padding-left: 15px;width: 100%;max-width: 720px;margin: auto;box-shadow: 0px 4px 20px rgba(5,57,94,.5);-moz-box-shadow: 0px 4px 20px rgba(5,57,94,.5);-webkit-box-shadow: 0px 4px 20px rgba(5,57,94,.5);">
+	<h1 class="mb-4">Information</h1>
+    <div class="d-flex justify-content-center mb-3">
+{#        <img src={% static "images/info-mobile.png" %} style="width: 380px; height: 70px;">#}
+        <img src={% static "images/info-mobile.png" %} alt="STAY" style="width:350px; height:70px">
+    </div>
+
+    <div class="container-fluid col-11">
+
+    	<div class="row mb-2">
+			<div class="col-3 d-flex justify-content-center" style="background-color: #FCBA12; font-weight: bold; border-radius: 5px; align-items:center;">In Date</div>
+			<div class="col d-flex justify-content-center">{{ shipmentFilter.form.in_date_range }}</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-3 d-flex justify-content-center" style="background-color: #FCBA12; font-weight: bold; border-radius: 5px; align-items:center;">Vessel</div>
+			<div class="col d-flex justify-content-center">
+                <input list="vesselsF" type="text" id="pickVesselF" {{ shipmentFilter.form.vessel }}>
+                <datalist id="vesselsF">
+                    {% for vess in allVessels %}
+                        <option value="{{ vess }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-3 d-flex justify-content-center" style="background-color: #FCBA12; font-weight: bold;  border-radius: 5px; align-items:center;">State</div>
+			<div class="col d-flex justify-content-center">{{ shipmentFilter.form.flag_status }}</div>
+		</div>
+
+		<div class="row d-flex justify-content-center">
+			<button type="submit" id="filterShipment_m" name="filterShipment_m" class="buttonAccept">Search</button>
+		</div>
+	</div>
+</div>
+
+<div class="table-responsive">
+
+    <table class="m" id="shipmentTable" style="width: 100%">
+    	<thead class="m">
+    		<tr class="m">
+    			<th class="m" >STATUS</th>
+				<th class="m" >VESSEL</th>
+				<th class="m" >DOC</th>
+				<th class="m" >ODR</th>
+				<th class="m" >SUPPLIER</th>
+				<th class="m" >QTY</th>
+				<th class="m">SIZE</th>
+				<th class="m">WEIGHT</th>
+				<th class="m" >IN</th>
+				<th class="m" >REMARK</th>
+			</tr>
+		</thead>
+
+		<tbody class="m">
+			{% for info in shipmentDisplay %}
+	        <tr class = "m">
+
+	        	{% if info.flag_status == "STAY" %}
+		            <td class="m" data-title="Status"><img class="statusIcon" src={% static "images/stay.png" %} alt="STAY"></td>
+		        {% elif info.flag_status == "START" %}
+		            <td class="m" data-title="Status"><img class="statusIcon" src={% static "images/start.png" %} alt="START"></td>
+		        {% elif info.flag_status == "COMPLETED" %}
+		            <td class="m" data-title="Status"><img class="statusIcon" src={% static "images/completed.png" %} alt="COMPLETED"></td>
+		        {% else %}
+		            <td class="m" data-title="Status"> </td>
+		        {% endif %}
+
+	        	{% if info.division == "B" %}
+		            <td class="m" data-title="Vessel">{{info.vessel}}</td>
+		            <td class="m" data-title="DOC">{{info.docs}}</td>
+		            <td class="m" data-title="ODR">{{info.odr}}</td>
+		            <td class="m" data-title="Supplier">{{info.supplier}}</td>
+		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
+		            <td class="m" data-title="Size">{{info.size}}</td>
+		            <td class="m" data-title="Weight">{{info.weight}}</td>
+		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="Remark">{{info.remark}}</td>
+
+	        	{% elif  info.division == "L" %}
+	        		<td class="m" data-title="Vessel">{{info.vessel}}</td>
+		            <td class="m" data-title="DOC">{{info.docs}}</td>
+		            <td class="m" data-title="ODR">{{info.odr}}</td>
+		            <td class="m" data-title="Supplier">{{info.supplier}}</td>
+		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
+		            <td class="m" data-title="Size">{{info.size}}</td>
+		            <td class="m" data-title="Weight">{{info.weight}}</td>
+		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="Remark">{{info.remark}}</td>
+	           	{% else %}
+	           		<td class="m" data-title="Vessel">{{info.vessel}}</td>
+		            <td class="m" data-title="DOC">{{info.docs}}</td>
+		            <td class="m" data-title="ODR">{{info.odr}}</td>
+		            <td class="m" data-title="Supplier">{{info.supplier}}</td>
+		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
+		            <td class="m" data-title="Size">{{info.size}}</td>
+		            <td class="m" data-title="Weight">{{info.weight}}</td>
+		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="Remark">{{info.remark}}</td>
+	            {% endif %}
+	        </tr>
+	        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</form>
+
+<div style="text-align: right; margin-right: 5cm">
+    {% if shipmentDisplay.has_previous %}
+        <a href="?{% parameter_replacing page=1 %}">First</a>
+        {% if shipmentDisplay.previous_page_number != 1 %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.previous_page_number %}">Previous</a>
+        {% endif %}
+    {% endif %}
+    {{ shipmentDisplay.number }}<b>/</b>{{ shipmentDisplay.paginator.num_pages }}
+    {% if shipmentDisplay.has_next %}
+        {% if shipmentDisplay.next_page_number != shipmentDisplay.paginator.num_pages %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% parameter_replacing page=shipmentDisplay.paginator.num_pages %}">Last</a>
+    {% endif %}
+
+</div>
+
+{% endblock bodyContent %}

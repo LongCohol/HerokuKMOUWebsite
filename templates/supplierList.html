@@ -19,15 +19,6 @@
     </thead>
 
     <tbody id="splBody"></tbody>
-{#    <tbody>#}
-{#        {% for info in supplierList %}#}
-{#        <tr>#}
-{#            <td class="rowInfo">{{ info.supplierID }}</td>#}
-{#            <td class="rowInfo">{{ info.supplierName }}</td>#}
-{#            <td class="rowInfo">{{ info.SPLpassword }}</td>#}
-{#        </tr>#}
-{#        {% endfor %}#}
-{#    </tbody>#}
 
 </table>
 
@@ -43,16 +34,12 @@
     let infoSpl1 = document.getElementById('{{ supplierForm.splID.auto_id }}');
     let infoSpl2 = document.getElementById('{{ supplierForm.splName.auto_id }}');
     let infoSpl3 = document.getElementById('{{ supplierForm.splPassword.auto_id }}');
-    {#let infoSpl1 = document.getElementById('{{ supplierForm.supplierID.auto_id }}');#}
-    {#let infoSpl2 = document.getElementById('{{ supplierForm.supplierName.auto_id }}');#}
-    {#let infoSpl3 = document.getElementById('{{ supplierForm.SPLpassword.auto_id }}');#}
     var splUpdateID = "";
     var splDeleteID = "";
     splDisplayList();
 
     function splDisplayList() {
         let supplierContent="";
-        {#var splList = {{ userList | safe }};#}
         var splList = {{ supplierList | safe }};
         var splNumber = splList.length;
         for(let i = 0;i < splNumber; i++) {
@@ -60,9 +47,6 @@
             supplierContent += '<td class="rowInfo cellBorder" style="font-weight: bold; width: 7cm">' + splList[i]["fields"]["userID"] + '</td>';
             supplierContent += '<td class="rowInfo cellBorder" style="font-weight: bold; width: 7cm">' + splList[i]["fields"]["companyName"] + '</td>';
             supplierContent += '<td class="rowInfo cellBorder" style="font-weight: bold; width: 7cm">' + splList[i]["fields"]["rawPassword"] + '</td>';
-            {#supplierContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + splList[i]["fields"]["supplierID"] + '</td>';#}
-            {#supplierContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + splList[i]["fields"]["supplierName"] + '</td>';#}
-            {#supplierContent += '<td class="rowInfo" style="width: 7cm; font-weight: bold">' + splList[i]["fields"]["SPLpassword"] + '</td>';#}
             supplierContent += '</tr>';
         }
         supplierBody.innerHTML = supplierContent;
