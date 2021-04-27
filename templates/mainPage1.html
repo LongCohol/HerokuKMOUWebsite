@@ -1,0 +1,13 @@
+{% extends "body.html" %}
+
+{% block bodyContent %}
+    {% if staffExist.permission == "Read + Modify" %}
+       <a href="{% url "adminPage" %}"><button class="buttonAdmin">Settings</button></a>
+    {% endif %}
+    {% include "shipmentRegister.html" %}
+    {% include "shipmentFilter.html" %}
+    {% include "shipmentModify.html" %}
+{#    {% include "shipmentDisplayForm.html" %}#}
+    {% include "shipmentDisplay.html" %}
+
+{% endblock bodyContent %}

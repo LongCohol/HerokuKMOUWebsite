@@ -1,0 +1,251 @@
+{% load parameter_replacing %}
+{% load static %}
+
+<div style="text-align: center">
+    <formTitle>SHIPMENT LIST</formTitle>
+</div>
+
+<form method="post">{% csrf_token %}
+<table id="shipmentTableForm" class="rowHoverStyle" style="margin-left: 2cm">
+    <col style="width: 1cm">
+    <col style="width: 2.5cm">
+    <col style="width: 3.5cm">
+    <col style="width: 1cm">
+    <col style="width: 4cm">
+    <col style="width: 4cm">
+    <col style="width: 1cm">
+    <col style="width: 1cm">
+    <col style="width: 4cm">
+    <col style="width: 2cm">
+    <col style="width: 4cm">
+    <col style="width: 2cm">
+    <col style="width: 1cm">
+    <col style="width: 5cm">
+    <col style="width: 3cm">
+    <col style="width: 4cm">
+    <col style="width: 5cm">
+    <col style="width: 5cm">
+    <col style="width: 1.5cm">
+    <col style="width: 3cm">
+
+    <thead>
+        <tr>
+            <th class="rowTitle"></th>
+            <th class="rowTitle">COMPANY</th>
+            <th class="rowTitle">VESSEL</th>
+            <th class="rowTitle">DOC</th>
+            <th class="rowTitle">ODR</th>
+            <th class="rowTitle">SUPPLIER</th>
+            <th class="rowTitle">QTY</th>
+            <th class="rowTitle">UNIT</th>
+            <th class="rowTitle">SIZE</th>
+            <th class="rowTitle">WEIGHT</th>
+            <th class="rowTitle">IN</th>
+            <th class="rowTitle">W/H</th>
+            <th class="rowTitle">BY</th>
+            <th class="rowTitle">BLNO</th>
+            <th class="rowTitle">PORT</th>
+            <th class="rowTitle">OUT</th>
+            <th class="rowTitle">REMARK</th>
+            <th class="rowTitle">JOB NO</th>
+            <th class="rowTitle">STATUS</th>
+            <th class="rowTitle">USER CREATED</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for row in shipmentDisplay %}
+{#        {% for info in shipmentDisplayTab %}#}
+        <tr>
+            <td class="cellBorder"><input type="checkbox" name="selection" id="selection" value="{{ info.number }}"></td>
+
+            {% if info.division == "B" %}
+                <td class="cellBorder divisionB">{{info.company}}</td>
+                <td class="cellBorder divisionB">{{info.vessel}}</td>
+                <td class="cellBorder divisionB">{{info.docs}}</td>
+                <td class="cellBorder divisionB">{{info.odr}}</td>
+                <td class="cellBorder divisionB">{{info.supplier}}</td>
+                <td class="cellBorder divisionB">{{info.quanty}}</td>
+                <td class="cellBorder divisionB">{{info.unit}}</td>
+                <td class="cellBorder divisionB">{{info.size}}</td>
+                <td class="cellBorder divisionB">{{info.weight}}</td>
+                <td class="cellBorder divisionB">{{info.in_date}}</td>
+                <td class="cellBorder divisionB">{{info.warehouse}}</td>
+                <td class="cellBorder divisionB">{{info.by}}</td>
+                <td class="cellBorder divisionB">{{info.BLno}}</td>
+                <td class="cellBorder divisionB">{{info.port}}</td>
+                <td class="cellBorder divisionB">{{info.out_date}}</td>
+                <td class="cellBorder divisionB">{{info.remark}}</td>
+                <td class="cellBorder divisionB">{{info.job_number}}</td>
+            {% elif  info.division == "L" %}
+                <td class="cellBorder divisionL">{{info.company}}</td>
+                <td class="cellBorder divisionL">{{info.vessel}}</td>
+                <td class="cellBorder divisionL">{{info.docs}}</td>
+                <td class="cellBorder divisionL">{{info.odr}}</td>
+                <td class="cellBorder divisionL">{{info.supplier}}</td>
+                <td class="cellBorder divisionL">{{info.quanty}}</td>
+                <td class="cellBorder divisionL">{{info.unit}}</td>
+                <td class="cellBorder divisionL">{{info.size}}</td>
+                <td class="cellBorder divisionL">{{info.weight}}</td>
+                <td class="cellBorder divisionL">{{info.in_date}}</td>
+                <td class="cellBorder divisionL">{{info.warehouse}}</td>
+                <td class="cellBorder divisionL">{{info.by}}</td>
+                <td class="cellBorder divisionL">{{info.BLno}}</td>
+                <td class="cellBorder divisionL">{{info.port}}</td>
+                <td class="cellBorder divisionL">{{info.out_date}}</td>
+                <td class="cellBorder divisionL">{{info.remark}}</td>
+                <td class="cellBorder divisionL">{{info.job_number}}</td>
+            {% else %}
+                <td class="cellBorder">{{info.company}}</td>
+                <td class="cellBorder">{{info.vessel}}</td>
+                <td class="cellBorder">{{info.docs}}</td>
+                <td class="cellBorder">{{info.odr}}</td>
+                <td class="cellBorder">{{info.supplier}}</td>
+                <td class="cellBorder">{{info.quanty}}</td>
+                <td class="cellBorder">{{info.unit}}</td>
+                <td class="cellBorder">{{info.size}}</td>
+                <td class="cellBorder">{{info.weight}}</td>
+                <td class="cellBorder">{{info.in_date}}</td>
+                <td class="cellBorder">{{info.warehouse}}</td>
+                <td class="cellBorder">{{info.by}}</td>
+                <td class="cellBorder">{{info.BLno}}</td>
+                <td class="cellBorder">{{info.port}}</td>
+                <td class="cellBorder">{{info.out_date}}</td>
+                <td class="cellBorder">{{info.remark}}</td>
+                <td class="cellBorder">{{info.job_number}}</td>
+            {% endif %}
+
+            {% if info.flag_status == "STAY" %}
+                <td class="cellBorder"><img class="statusIcon" src={% static "images/stay.png" %} alt="STAY"></td>
+            {% elif info.flag_status == "START" %}
+                <td class="cellBorder"><img class="statusIcon" src={% static "images/start.png" %} alt="START"></td>
+            {% elif info.flag_status == "COMPLETED" %}
+                <td class="cellBorder"><img class="statusIcon" src={% static "images/completed.png" %} alt="COMPLETED"></td>
+            {% else %}
+                <td class="cellBorder"></td>
+            {% endif %}
+            <td class="cellBorder">{{ info.insert_org }}</td>
+        </tr>
+{#        {% endfor %}#}
+    {% endfor %}
+
+    </tbody>
+
+</table>
+</form>
+
+
+<div style="text-align: right; margin-right: 5cm">
+    {% if shipmentDisplay.has_previous %}
+        <a href="?{% parameter_replacing page=1 %}">First</a>
+        {% if shipmentDisplay.previous_page_number != 1 %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.previous_page_number %}">Previous</a>
+        {% endif %}
+    {% endif %}
+    {{ shipmentDisplay.number }}<b>/</b>{{ shipmentDisplay.paginator.num_pages }}
+    {% if shipmentDisplay.has_next %}
+        {% if shipmentDisplay.next_page_number != shipmentDisplay.paginator.num_pages %}
+            <a href="?{% parameter_replacing page=shipmentDisplay.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% parameter_replacing page=shipmentDisplay.paginator.num_pages %}">Last</a>
+    {% endif %}
+
+</div>
+
+<script>
+    const shipmentForm = document.getElementById('shipmentForm');
+    const shipmentTable = document.getElementById('shipmentTable');
+    const shipmentCells = shipmentTable.getElementsByTagName('td');
+    const shipmentRows = shipmentTable.getElementsByTagName('tr');
+
+    var checkList = [];
+    var checkBoxes = shipmentTable.getElementsByTagName('input');
+    for (let i = 0;i < checkBoxes.length; i++) {
+        checkBoxes[i].onclick = function () {
+            if (checkBoxes[i].checked) {
+                checkList.push(checkBoxes[i].value)
+            } else {
+                var index = checkList.indexOf(checkBoxes[i].value);
+                checkList.splice(index, 1);
+            }
+        }
+    }
+    {#    .addEventListener('click', function () {#}
+    {#    var ticked = this.checked;#}
+    {#    if (ticked) {#}
+    {#        checkList.push(this.value);#}
+    {#    } else {#}
+    {#        checkList.pop(this.value);#}
+    {#    }#}
+    {#    alert(checkList);#}
+    {#)#}
+    let infoShp1 = document.getElementById('{{ shipmentRegister.company.auto_id }}');
+    let infoShp2 = document.getElementById('{{ shipmentRegister.vessel.auto_id }}');
+    let infoShp3 = document.getElementById('{{ shipmentRegister.docs.auto_id }}');
+    let infoShp4 = document.getElementById('{{ shipmentRegister.odr.auto_id }}');
+    let infoShp5 = document.getElementById('{{ shipmentRegister.supplier.auto_id }}');
+    let infoShp6 = document.getElementById('{{ shipmentRegister.quanty.auto_id }}');
+    let infoShp7 = document.getElementById('{{ shipmentRegister.unit.auto_id }}');
+    let infoShp8 = document.getElementById('{{ shipmentRegister.size.auto_id }}');
+    let infoShp9 = document.getElementById('{{ shipmentRegister.weight.auto_id }}');
+    let infoShp10 = document.getElementById('{{ shipmentRegister.in_date.auto_id }}');
+    let infoShp11 = document.getElementById('{{ shipmentRegister.warehouse.auto_id }}');
+    let infoShp12 = document.getElementById('{{ shipmentRegister.by.auto_id }}');
+    let infoShp13 = document.getElementById('{{ shipmentRegister.BLno.auto_id }}');
+    let infoShp14 = document.getElementById('{{ shipmentRegister.port.auto_id }}');
+    let infoShp15 = document.getElementById('{{ shipmentRegister.out_date.auto_id }}');
+    let infoShp16 = document.getElementById('{{ shipmentRegister.remark.auto_id }}');
+    let infoShp17 = document.getElementById('{{ shipmentRegister.division.auto_id }}');
+    let infoShp18 = document.getElementById('{{ shipmentRegister.job_number.auto_id }}');
+    let infoShp19 = document.getElementById('{{ shipmentRegister.image.auto_id }}');
+    let infoShp20 = document.getElementById('{{ shipmentRegister.image1.auto_id }}');
+    let infoShp21 = document.getElementById('{{ shipmentRegister.image2.auto_id }}');
+    let infoShp22 = document.getElementById('{{ shipmentRegister.pdf_file.auto_id }}');
+
+    for (let i = 0; i < shipmentCells.length; i++) {
+        // Make function onclick for any cells
+        let cell = shipmentCells[i];
+        cell.onclick = function () {
+            // Get the row id where the cell exists
+            let rowId = this.parentNode.rowIndex;
+            let rowSelected = shipmentTable.getElementsByTagName('tr')[rowId];
+
+            // Get data from the row as HTML style
+            var shp1 = rowSelected.cells[1].innerHTML;
+            var shp2 = rowSelected.cells[2].innerHTML;
+            var shp3 = rowSelected.cells[3].innerHTML;
+            var shp4 = rowSelected.cells[4].innerHTML;
+            var shp5 = rowSelected.cells[5].innerHTML;
+            var shp6 = rowSelected.cells[6].innerHTML;
+            var shp7 = rowSelected.cells[7].innerHTML;
+            var shp8 = rowSelected.cells[8].innerHTML;
+            var shp9 = rowSelected.cells[9].innerHTML;
+            var shp10 = rowSelected.cells[10].innerHTML;
+            var shp11 = rowSelected.cells[11].innerHTML;
+            var shp12 = rowSelected.cells[12].innerHTML;
+            var shp13 = rowSelected.cells[13].innerHTML;
+            var shp14 = rowSelected.cells[14].innerHTML;
+            var shp15 = rowSelected.cells[15].innerHTML;
+            var shp16 = rowSelected.cells[16].innerHTML;
+            var shp17 = rowSelected.cells[17].innerHTML;
+            // Auto-fill the form with the cleaned data
+            infoShp1.value = shp1;
+            infoShp2.value = shp2;
+            infoShp3.value = shp3;
+            infoShp4.value = shp4;
+            infoShp5.value = shp5;
+            infoShp6.value = shp6;
+            infoShp7.value = shp7;
+            infoShp8.value = shp8;
+            infoShp9.value = shp9;
+            infoShp10.value = shp10;
+            infoShp11.value = shp11;
+            infoShp12.value = shp12;
+            infoShp13.value = shp13;
+            infoShp14.value = shp14;
+            infoShp15.value = shp15;
+            infoShp16.value = shp16;
+            infoShp17.value = shp17;
+        }
+    }
+</script>

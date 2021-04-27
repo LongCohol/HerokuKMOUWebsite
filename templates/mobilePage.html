@@ -1,0 +1,90 @@
+{% extends "body-mobile.html" %}
+
+{% block bodyContent %}
+<div class="container-fluid col-11">
+	<div class="mb-2" style="text-align: center; padding: 5px 5px; font-weight: bolder; font-size: 20px;  ">
+		<h1>DATA INPUT</h1>
+	</div>
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="row mb-2">
+		 	<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold; display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px; ">
+				COMPANY
+			</div>
+			<div class="col d-flex justify-content-start">
+				{{ shipmentRegister.company }}
+			</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold; display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				VESSEL
+			</div>
+
+			<div class="col d-flex justify-content-start">
+				{{ shipmentRegister.vessel }}
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold; display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				SUPPLIER
+			</div>
+
+			<div class="col d-flex justify-content-start">
+				{{ shipmentRegister.supplier }}
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold;  display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				QTY
+			</div>
+
+			<div class="col d-flex justify-content-start">
+				{{ shipmentRegister.quanty }}
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold;  display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				IN
+			</div>
+
+			<div class="col d-flex justify-content-start">
+				{{ shipmentRegister.in_date }}
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold;  display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				IMAGE-1
+			</div>
+			<div class="col-7 justify-content-start">
+				{{ shipmentRegister.image }}
+			</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold;  display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				IMAGE-2
+			</div>
+			<div class="col-7 d-flex justify-content-start">
+				{{ shipmentRegister.image1 }}
+			</div>
+		</div>
+		<div class="row mb-4">
+			<div class="col-4 d-flex justify-content-center" style="background-color: rgb(255, 215, 0); font-weight: bold;  display:flex;align-items:center; border: 1px solid rgb(0, 153, 204);border-radius: 5px;">
+				IMAGE-3
+			</div>
+			<div class="col-7 d-flex justify-content-start">
+				{{ shipmentRegister.image2 }}
+			</div>
+		</div>
+        <div class="row mb-2 d-flex justify-content-center">
+            <button class="col-3" type="submit" id="addShipment_m" name="addShipment_m" onclick="addShipmentOrder()" style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 10px 15px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;border-radius: 5px;  border: 1px solid rgb(0, 153, 204); font-weight: bold">SAVE</button>
+        </div>
+	</form>
+
+</div>
+
+
+{% endblock bodyContent %}

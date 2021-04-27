@@ -15,26 +15,50 @@ PERMISSION = {
 
 
 class OperatorLogin(forms.ModelForm):
-    userID = forms.CharField(label="Staff ID", widget=forms.TextInput)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    userIDstaff = forms.CharField(label="Staff ID", widget=forms.TextInput)
+    passwordstaff = forms.CharField(label="Password", widget=forms.PasswordInput)
 
     class Meta:
         model = Account
-        fields = ('userID', 'password')
+        fields = ('userIDstaff', 'passwordstaff')
 
     def __init__(self, *args, **kwargs):
         # Set up dimension for fields with CSS style
         super(OperatorLogin, self).__init__(*args, **kwargs)
-        self.fields['userID'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
-        self.fields['password'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
+        self.fields['userIDstaff'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
+        self.fields['passwordstaff'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
 
     def clean(self):
         if self.is_valid():
-            username = self.cleaned_data.get('userID')
-            password = self.cleaned_data.get('password')
+            username = self.cleaned_data.get('userIDstaff')
+            password = self.cleaned_data.get('passwordstaff')
 
             if not authenticate(userID=username, password=password):
-                raise forms.ValidationError("Invalid account. Please try again")
+                raise forms.ValidationError("Invalid staff account. Please try again")
+    ###########################################################
+
+
+class CustomerLogin(forms.ModelForm):
+    userIDcustomer = forms.CharField(label="Customer ID", widget=forms.TextInput)
+    passwordcustomer = forms.CharField(label="Password", widget=forms.PasswordInput)
+
+    class Meta:
+        model = Account
+        fields = ('userIDcustomer', 'passwordcustomer')
+
+    def __init__(self, *args, **kwargs):
+        # Set up dimension for fields with CSS style
+        super(CustomerLogin, self).__init__(*args, **kwargs)
+        self.fields['userIDcustomer'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
+        self.fields['passwordcustomer'].widget.attrs['style'] = 'width: 5cm; height: 1cm'
+
+    def clean(self):
+        if self.is_valid():
+            username = self.cleaned_data.get('userIDcustomer')
+            password = self.cleaned_data.get('passwordcustomer')
+
+            if not authenticate(userID=username, password=password):
+                raise forms.ValidationError("Invalid customer account. Please try again")
     ###########################################################
 
 
@@ -107,7 +131,7 @@ class CompanyForm(forms.ModelForm):
     cpnName = forms.CharField()
     cpnEmail = forms.EmailField()
     cpnPassword = forms.CharField()
-    cpnVesselList = forms.CharField()
+    cpnVesselList = forms.CharField(widget=forms.Textarea())
 
     class Meta:
         model = Account

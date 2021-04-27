@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 'Company',
     # 'Supplier',
     'django_filters',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'WebsiteCompany_2021_03.urls'
@@ -148,3 +150,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_files')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+USER_AGENTS_CACHE = 'default'

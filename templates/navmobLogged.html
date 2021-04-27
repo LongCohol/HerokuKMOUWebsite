@@ -1,0 +1,15 @@
+<li class="nav-item"> <!-- Add distance=2 to margin in x-axis -->
+    <a class="nav-link linkHeader" href="{% url "logged_out" %}" style="color: rgb(255, 0, 0)">LOGOUT</a>
+</li>
+<li class="nav-item">
+    {% if request.user.isOpr %}
+        <a class="nav-link linkHeader" href="{% url "mainPage1" %}">HOME</a>
+    {% elif request.user.isSpl %}
+        <a class="nav-link linkHeader" href="{% url "mainPage2" %}">HOME</a>
+    {% elif request.user.isCpn %}
+        <a class="nav-link linkHeader" href="{% url "mainPage2" %}">HOME</a>
+    {% else %}
+        <a class="nav-link linkHeader" href="{% url "mainPage1" %}">HOME</a>
+    {% endif %}
+{#    <a class="nav-link linkHeader" href="{% url "frontpage" %}">HOME</a>#}
+</li>

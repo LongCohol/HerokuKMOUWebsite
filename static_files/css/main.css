@@ -1,4 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
+
 .headerPart {
+    background-color: white;
     height: 2cm;
 }
 .bodyPart {
@@ -22,39 +25,50 @@
 }
 .linkHeader {
     color: cadetblue;
-    text-decoration: none;
+    /*text-decoration: none;*/
+    align-items: center;
+    font-weight: bold;
+    display:flex;
+    font-size: 14px;
 }
 .linkFooter {
     color: darkred;
     text-decoration: none;
 }
+.statusIcon {
+    width: 30px;
+    height: 30px;
+}
 .cellBorder {
     border: 1px solid black;
 }
-/*td {*/
-/*    border: 1px solid black;*/
-/*}*/
+.divisionB {
+    color: red;
+}
+.divisionL {
+    color: blue;
+}
 
 formTitle {
-    font-family: "Times New Roman";
+    /*font-family: "Times New Roman";*/
     font-weight: bold;
     font-size: 20px;
 }
 .rowTitle {
-    font-family: "Times New Roman";
+    /*font-family: "Times New Roman";*/
     font-weight: bold;
     font-size: 14px;
-    background-color: lightyellow;
+    background-color: #FCBA12;
     text-align: center;
 }
 .columnTitle {
-    font-family: "Times New Roman";
+    /*font-family: "Times New Roman";*/
     font-weight: bold;
     font-size: 14px;
     text-align: left;
 }
 .rowInfo {
-    font-family: "Times New Roman";
+    /*font-family: "Times New Roman";*/
     font-size: 12px;
     text-align: center;
 }
@@ -62,19 +76,50 @@ formTitle {
     background-color: darkgray;
 }
 .buttonAccept {
-    background-color: green;
-    color: black;
-    height: 1cm;
+    background-color: #009933;
+    color: white;
+    height: 0.8cm;
+    border:none;
+    /*border-radius: 5px;*/
+    font-size: 14px;
+    width: 100px;
+}
+.buttonOkay {
+    background-color: black;
+    color: white;
+    height: 0.8cm;
+    border:none;
+    /*border-radius: 5px;*/
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    width: 100px;
 }
 .buttonDelete {
     background-color: red;
-    color: black;
-    height: 1cm;
+    color: white;
+    height: 0.8cm;
+    border:none;
+    /*border-radius: 5px;*/
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    width: 100px;
 }
+/*.buttonOkay {*/
+/*    background-color: black;*/
+/*    color: white;*/
+/*    height: 0.8cm;*/
+/*}*/
+/*.buttonDelete {*/
+/*    background-color: red;*/
+/*    color: black;*/
+/*    height: 0.8cm;*/
+/*}*/
 .buttonAdmin {
     background-color: black;
     color: white;
-    font-family: "Times New Roman";
+    /*font-family: "Times New Roman";*/
     font-weight: bold;
     font-size: 14px;
     text-align: center;
@@ -85,3 +130,87 @@ formTitle {
     top: 3cm;
     right: 2cm;
 }
+h1{
+    align-content: center;
+    font-weight: bold;
+    text-align: center;
+    font-size: 35px;
+    height:30px;
+    color: #342809;
+}
+h2{
+    align-content: center;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    height:50px;
+}
+/*table{*/
+/*    font-size: 1.5rem;*/
+/*    width: 100%;*/
+/*    max-width: 720px;*/
+/*    margin: 40px auto;*/
+/*    box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*    -moz-box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*    -webkit-box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*}*/
+/*table thead{*/
+/*    background-color: #A77802;*/
+/*    border-radius: 10px;*/
+/*}*/
+/*table th, table td{*/
+/*    border: 0.5px solid #A77802;*/
+/*    padding: 5px 10px;*/
+
+/*}*/
+
+/*@media screen and (max-width: 767px){*/
+
+/*    table thead{*/
+/*        display : none;*/
+/*       }*/
+/*    table{*/
+/*        padding: 0 16px;*/
+/*        }*/
+/*    table tbody{*/
+/*        padding: 0 16px;*/
+/*        }*/
+/*    table tbody, table tbody tr{*/
+/*        display: block;*/
+/*        width: 100%;*/
+/*        }*/
+/*    table tbody tr td::before, table tbody tr td::before{*/
+/*        border-radius: 5px;*/
+/*        content: attr(data-title);*/
+/*        display: block ;*/
+/*        font-weight: 600;*/
+/*        font-size: 12px;*/
+/*        color: #A77802;*/
+
+/*       }*/
+/*    table tbody tr td,*/
+/*    table tbody tr th{*/
+/*        display: block; width: 100%;*/
+/*        float: left; font-size: 16px;*/
+/*        color: #342809;*/
+/*        font-weight: 600;*/
+
+/*    }*/
+/*    table tbody tr{*/
+/*        margin-bottom: 16px;*/
+/*        float: left; clear: both;*/
+
+/*        box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*        -moz-box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*        -webkit-box-shadow: 0px 4px 20px rgba(5,57,94,.5);*/
+/*    }*/
+
+/*    td:nth-of-type(1):before { content: "Vessel"; }*/
+/*    td:nth-of-type(2):before { content: "DOC"; }*/
+/*    td:nth-of-type(3):before { content: "ODR"; }*/
+/*    td:nth-of-type(4):before { content: "Supplier"; }*/
+/*    td:nth-of-type(5):before { content: "Quantity"; }*/
+/*    td:nth-of-type(6):before { content: "Size"; }*/
+/*    td:nth-of-type(7):before { content: "In date"; }*/
+/*    td:nth-of-type(8):before { content: "Remark"; }*/
+/*}*/

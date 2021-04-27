@@ -1,12 +1,20 @@
 <form method="post">{% csrf_token %}
     <table style="margin-left: auto; margin-right: auto">
-        <col style="width:2cm">
+        <col style="width:3cm">
         <col style="width:6cm">
 
         <div style="text-align: center">
-            <formTitle>STAFF LOGIN</formTitle>
+            <h1>STAFF LOGIN</h1>
         </div>
 
+{#        <tr>#}
+{#            <td class="columnTitle">Staff ID</td>#}
+{#            <td style="text-align: center">{{ staffLogin.userIDopr }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td class="columnTitle">Password</td>#}
+{#            <td style="text-align: center">{{ staffLogin.passwordopr }}</td>#}
+{#        </tr>#}
         {% for field in staffLogin %}
             <tr>
                 <td class="columnTitle">{{ field.label_tag }}</td>

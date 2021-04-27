@@ -1,12 +1,27 @@
-{% extends "body.html" %}
+{#{% extends "body.html" %}#}
+{##}
+{#{% block bodyContent %}#}
+{#    <div style="text-align: center">#}
+{#        <h3>LOGIN SUCCEEDED!</h3>#}
+{##}
+{#        <p>Welcome, {{ staffExist.userID }}</p>#}
+{#        <p>To continue, please <a href="{% url "mainPage1" %}">click here</a></p>#}
+{##}
+{#    </div>#}
+{##}
+{#{% endblock bodyContent %}#}
+
+{% extends "body-mobile.html" %}
 
 {% block bodyContent %}
-    <div style="text-align: center">
-        <h3>LOGIN SUCCEEDED!</h3>
+<div class="d-flex justify-content-center">
+	<div style="text-align: center; border-radius: 10px; box-shadow: 0px 4px 20px rgba(5,57,94,1); -moz-box-shadow: 0px 4px 20px rgba(5,57,94,1);-webkit-box-shadow: 0px 4px 20px rgba(5,57,94,1); width: 450px; padding-top: 20px; padding-bottom: 20px">
+        <h1 style="margin-bottom: 1cm">LOGIN SUCCEEDED!</h1>
 
-        <p>Welcome, {{ staffExist.userID }}</p>
-        <p>To continue, please <a href="{% url "mainPage" %}">click here</a></p>
+        <h2 style="margin-botton: 3px">Welcome, {{ staffExist.userID }}</h2>
+        <h2>To continue, please <a href="{% url "mainPage1" %}">click here</a></h2>
 
     </div>
+</div>
 
 {% endblock bodyContent %}

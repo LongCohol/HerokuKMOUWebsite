@@ -15,9 +15,11 @@
             <!-- Add links to navbar -->
                 <ul class="nav">
                     {% if request.user.is_authenticated %}
-                        {% include "navigationLogged.html" %}
+                        {% include "navmobLogged.html" %}
+{#                        {% include "navigationLogged.html" %}#}
                     {% else %}
-                        {% include "navigationUnlogged.html" %}
+                        {% include "navmobUnlogged.html" %}
+{#                        {% include "navigationUnlogged.html" %}#}
                     {% endif %}
                 </ul>
             </nav>

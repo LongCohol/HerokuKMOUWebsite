@@ -1,0 +1,59 @@
+<form method="post">{% csrf_token %}
+    <table style="margin-left: auto; margin-right: auto">
+        <col style="width: 6cm">
+        <col style="width: 6cm">
+        <col style="width: 6cm">
+        <col style="width: 6cm">
+        <col style="width: 6cm">
+        <col style="width: 6cm">
+
+        <div style="text-align: center; margin-top: 2cm">
+            <formTitle>UPDATE DATA INPUT</formTitle>
+        </div>
+
+        <div>
+            <input type="hidden" id="updateList" name="checkedList" value="">
+        </div>
+        <tr>
+            <td class="rowTitle">{{ shipmentModify.company.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.vessel.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.supplier.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.warehouse.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.job_number.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.port.label_tag }}</td>
+        </tr>
+        <tr style="height: 1.2cm">
+            <td style="text-align: center">{{ shipmentModify.company }}</td>
+            <td style="text-align: center">{{ shipmentModify.vessel }}</td>
+            <td style="text-align: center">{{ shipmentModify.supplier }}</td>
+            <td style="text-align: center">{{ shipmentModify.warehouse }}</td>
+            <td style="text-align: center">{{ shipmentModify.job_number }}</td>
+            <td style="text-align: center">{{ shipmentModify.port }}</td>
+        </tr>
+        <tr>
+            <td class="rowTitle">{{ shipmentModify.division.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.flag_status.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.in_dateM.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.out_dateM.label_tag }}</td>
+            <td class="rowTitle">{{ shipmentModify.remark.label_tag }}</td>
+            <td class="rowTitle">ACTION</td>
+        </tr>
+        <tr style="height: 2cm">
+            <td style="text-align: center">{{ shipmentModify.division }}</td>
+            <td style="text-align: center">{{ shipmentModify.flag_status }}</td>
+            <td style="text-align: center">{{ shipmentModify.in_dateM }}</td>
+            <td style="text-align: center">{{ shipmentModify.out_dateM }}</td>
+            <td style="text-align: center">{{ shipmentModify.remark }}</td>
+            <td>
+                <div style="text-align: center">
+                    <button type="submit" id="modifyShipment" name="modifyShipment" onclick="modifyShipmentOrder()" class="buttonAccept" style="width: 2cm">Update</button>
+                </div>
+                <div style="text-align: center">
+                    <button type="submit" id="deleteShipment" name="deleteShipment" onclick="deleteShipmentOrder()" class="buttonDelete" style="width: 2cm">Delete</button>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+</form>

@@ -1,0 +1,29 @@
+<form method="post">{% csrf_token %}
+    <table style="margin-left: auto; margin-right: auto">
+        <col style="width:3cm">
+        <col style="width:6cm">
+
+        <div style="text-align: center; margin-top: 1cm">
+            <h1>CUSTOMER LOGIN</h1>
+        </div>
+
+        {% for field in customerLogin %}
+            <tr>
+                <td class="columnTitle">{{ field.label_tag }}</td>
+                <td style="text-align: center">{{ field }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button class="buttonAccept" type="submit" name="customerloginform">Login</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">{{ customerLogin.non_field_errors }}</td>
+        </tr>
+
+    </table>
+
+</form>

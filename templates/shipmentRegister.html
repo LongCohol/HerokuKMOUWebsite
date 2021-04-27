@@ -1,12 +1,12 @@
 <form method="post" enctype="multipart/form-data">{% csrf_token %}
-    <table style="margin-left: auto; margin-right: auto">
+    <table id="shipmentForm" style="margin-left: auto; margin-right: auto">
         <col style="width: 7cm">
         <col style="width: 7cm">
         <col style="width: 7cm">
         <col style="width: 7cm">
 
         <div style="text-align: center">
-            <formTitle>ADD/UPDATE NEW SHIPMENT</formTitle>
+            <formTitle>ADD NEW SHIPMENT</formTitle>
         </div>
 
         <tbody>
@@ -16,9 +16,18 @@
                 <td class="rowTitle">{{ shipmentRegister.docs.label_tag }}</td>
                 <td class="rowTitle">{{ shipmentRegister.odr.label_tag }}</td>
             </tr>
-            <tr>
+            <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.company }}</td>
-                <td style="text-align: center">{{ shipmentRegister.vessel }}</td>
+{#                <td style="text-align: center" list="vessels">{{ shipmentRegister.vessel }}</td>#}
+                <td style="text-align: center">
+                    <input list="vessels" type="text" id="pickVessel" oninput="pickVessel()" {{ shipmentRegister.vessel }}>
+                </td>
+
+                <datalist id="vessels">
+                    {% for vess in allVessels %}
+                        <option value="{{ vess }}">
+                    {% endfor %}
+                </datalist>
                 <td style="text-align: center">{{ shipmentRegister.docs }}</td>
                 <td style="text-align: center">{{ shipmentRegister.odr }}</td>
             </tr>
@@ -29,7 +38,7 @@
                 <td class="rowTitle">{{ shipmentRegister.unit.label_tag }}</td>
                 <td class="rowTitle">{{ shipmentRegister.size.label_tag }}</td>
             </tr>
-            <tr>
+            <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.supplier }}</td>
                 <td style="text-align: center">{{ shipmentRegister.quanty }}</td>
                 <td style="text-align: center">{{ shipmentRegister.unit }}</td>
@@ -42,7 +51,7 @@
                 <td class="rowTitle">{{ shipmentRegister.warehouse.label_tag }}</td>
                 <td class="rowTitle">{{ shipmentRegister.by.label_tag }}</td>
             </tr>
-            <tr>
+            <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.weight }}</td>
                 <td style="text-align: center">{{ shipmentRegister.in_date }}</td>
                 <td style="text-align: center">{{ shipmentRegister.warehouse }}</td>
@@ -55,7 +64,7 @@
                 <td class="rowTitle">{{ shipmentRegister.out_date.label_tag }}</td>
                 <td class="rowTitle">{{ shipmentRegister.remark.label_tag }}</td>
             </tr>
-            <tr>
+            <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.BLno }}</td>
                 <td style="text-align: center">{{ shipmentRegister.port }}</td>
                 <td style="text-align: center">{{ shipmentRegister.out_date }}</td>
@@ -67,7 +76,7 @@
                 <td class="rowTitle">{{ shipmentRegister.job_number.label_tag }}</td>
                 <td class="rowTitle" colspan="2">{{ shipmentRegister.image.label_tag }}</td>
             </tr>
-            <tr>
+            <tr style="height: 2cm">
                 <td style="text-align: center">{{ shipmentRegister.division}}</td>
                 <td style="text-align: center">{{ shipmentRegister.job_number}}</td>
                 <td>
@@ -81,6 +90,17 @@
                         {{ shipmentRegister.image2}}
                     </div>
                 </td>
+                <td>
+                    <div style="vertical-align: top; margin-left: 2cm">
+                        <button id="clearImage" name="clearImage" onclick="clearImage()" class="buttonOkay">Clear Image</button>
+                    </div>
+                    <div style="vertical-align: middle; margin-left: 2cm">
+                        <button id="clearImage1" name="clearImage1" onclick="clearImage1()" class="buttonOkay">Clear Image</button>
+                    </div>
+                    <div style="vertical-align: bottom; margin-left: 2cm">
+                        <button id="clearImage2" name="clearImage2" onclick="clearImage2()" class="buttonOkay">Clear Image</button>
+                    </div>
+                </td>
             </tr>
 
             <tr>
@@ -89,20 +109,25 @@
                 <td class="rowTitle"></td>
                 <td class="rowTitle"></td>
             </tr>
-            <tr>
-                <td colspan="4">
+            <tr style="height: 1.2cm">
+                <td>
                     <div style="margin-left: 1cm">
                         {{ shipmentRegister.pdf_file }}
                     </div>
                 </td>
-                <td></td>
+                <td>
+                    <div style="vertical-align: top; margin-left: 2cm">
+                        <button id="clearPdf" name="clearPdf" onclick="clearPdf()" class="buttonOkay">Clear PDF File</button>
+                    </div>
+                </td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td colspan="4">
                     <div style="text-align: right; margin-right: 1cm">
-                        <button type="submit" id="addShipment" name="addShipment" onclick="addShipmentOrder()" class="buttonAccept">Add/Update</button>
+                        <button type="submit" id="addShipment" name="addShipment" onclick="addShipmentOrder()" class="buttonAccept">Add</button>
+{#                        <button type="submit" id="changeShipment" name="changeShipment" onclick="changeShipmentOrder()" class="buttonOkay">Update</button>#}
                     </div>
                 </td>
             </tr>
@@ -115,3 +140,19 @@
     </table>
 
 </form>
+
+<script>
+    function clearImage(){
+        document.getElementById('{{shipmentRegister.image.auto_id}}').value= null;
+    }
+    function clearImage1(){
+        document.getElementById('{{shipmentRegister.image1.auto_id}}').value= null;
+    }
+    function clearImage2(){
+        document.getElementById('{{shipmentRegister.image2.auto_id}}').value= null;
+    }
+    function clearPdf(){
+        document.getElementById('{{shipmentRegister.pdf.auto_id}}').value= null;
+    }
+
+</script>
