@@ -1,13 +1,19 @@
 {% extends "body.html" %}
 
 {% block bodyContent %}
-    {% if staffExist.permission == "Read + Modify" %}
-       <a href="{% url "adminPage" %}"><button class="buttonAdmin">Settings</button></a>
-    {% endif %}
-    {% include "shipmentRegister.html" %}
-    {% include "shipmentFilter.html" %}
-    {% include "shipmentModify.html" %}
-{#    {% include "shipmentDisplayForm.html" %}#}
-    {% include "shipmentDisplay.html" %}
+    <div class="container-fluid col-11">
+    	<div class="row">
+    		{% include "shipmentRegister.html" %}
+    	</div>
+    	<div class="row">
+    		{% include "shipmentFilter.html" %}
+    	</div>
+    	<div class="row">
+    		{% include "shipmentModify.html" %}
+    	</div>
 
+    </div>
+    <div class="container-fluid col-11">
+		{% include "shipmentDisplay.html" %}
+	</div>
 {% endblock bodyContent %}

@@ -1,143 +1,253 @@
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 <form method="post" enctype="multipart/form-data">{% csrf_token %}
-    <table id="shipmentForm" style="margin-left: auto; margin-right: auto">
-        <col style="width: 7cm">
-        <col style="width: 7cm">
-        <col style="width: 7cm">
-        <col style="width: 7cm">
-
-        <div style="text-align: center">
-            <formTitle>ADD NEW SHIPMENT</formTitle>
+    <table id="shipmentForm" class="table table-bordered table-sm">
+        <div>
+            <formTitle>- ADD NEW SHIPMENT</formTitle>
         </div>
-
+        <div>
+            <input type="hidden" id="changeList" name="changedList" value="">
+        </div>
         <tbody>
             <tr>
-                <td class="rowTitle">{{ shipmentRegister.company.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.vessel.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.docs.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.odr.label_tag }}</td>
+                <td class="rowTitle" style="width: 7cm;background-color: #FCBA12">COMPANY</td>
+                <td class="rowTitle" style="width: 7cm;background-color: #FCBA12">VEESSEL</td>
+                <td class="rowTitle" style="width: 7cm;background-color: #FCBA12">DOCS</td>
+                <td class="rowTitle" style="width: 7cm;background-color: #FCBA12">ODR</td>
+                <td class="rowTitle" style="width: 7cm;background-color: #FCBA12">SUPPLIER</td>
             </tr>
-            <tr style="height: 2cm">
-                <td style="text-align: center">{{ shipmentRegister.company }}</td>
-                <td style="text-align: center">
-                    <input list="vessels" type="text" id="pickVessel" {{ shipmentRegister.vessel }}>
+            <tr >
+                <td style="text-align-last: center">
+                        <select class="form-select" name="company" style="text-align-last: center" id="id_company">
+                            <option value="" selected="">---------</option>
+                            <option value="GOLTENS">GOLTENS</option>
+                            <option value="MAN">MAN</option>
+                            <option value="JW">JW</option>
+                            <option value="CMSHIP">CMSHIP</option>
+                            <option value="MARUBISHI">MARUBISHI</option>
+                            <option value="STX">STX</option>
+                            <option value="SUNRIO">SUNRIO</option>
+                            <option value="KNK">KNK</option>
+                            <option value="EUCO">EUCO</option>
+                            <option value="SHI OCEAN">SHI OCEAN</option>
+                            <option value="GLOVIS">GLOVIS</option>
+                            <option value="KSS">KSS</option>
+                            <option value="GOWIN">GOWIN</option>
+                            <option value="INTERGIS">INTERGIS</option>
+                            <option value="SUNAMI">SUNAMI</option>
+                            <option value="보성상사">보성상사</option>
+                            <option value="이강공사">이강공사</option>
+                            <option value="오션마린">오션마린</option>
+                            <option value="CENTRA">CENTRA</option>
+                            <option value="POSSM">POSSM</option>
+                            <option value="DORVAL">DORVAL</option>
+                            <option value="SAEHAN">SAEHAN</option>
+                            <option value="FORTUNE WILL">FORTUNE WILL</option>
+                            <option value="SEOYANG">SEOYANG</option>
+                            <option value="KLCSM">KLCSM</option>
+                            <option value="DAN MO">DAN MO</option>
+                        </select>
+                </td>
+                <td style="text-align-last: center">
+                    <input class="form-select" list="vessels" type="text" id="pickVessel" name="vessel">
                     <datalist id="vessels">
                         {% for vess in allVessels %}
                             <option value="{{ vess }}">
                         {% endfor %}
                     </datalist>
                 </td>
-                <td style="text-align: center">{{ shipmentRegister.docs }}</td>
-                <td style="text-align: center">{{ shipmentRegister.odr }}</td>
-
+                <td style="text-align-last: center">
+                    <textarea name="docs" cols="40" rows="10" maxlength="500"  class="form-control" style="height:1cm" id="id_docs"></textarea>
+                </td>
+                <td style="text-align-last: center">
+                    <textarea name="odr" cols="40" rows="10" maxlength="100" class="form-control" style="height:1cm" id="id_odr"></textarea>
+                </td>
+                <td style="text-align-last: center">
+                    <textarea name="supplier" class="form-control" cols="40" rows="10" maxlength="100" style="height:1cm" id="id_supplier"></textarea>
+                </td>
             </tr>
 
             <tr>
-                <td class="rowTitle">{{ shipmentRegister.supplier.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.quanty.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.unit.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.size.label_tag }}</td>
+                <td class="rowTitle" style="background-color: #FCBA12">DIVISION</td>
+                <td class="rowTitle" style="background-color: #FCBA12">JOB.NO</td>
+                <td class="rowTitle" style="background-color: #FCBA12">QTY</td>
+                <td class="rowTitle" style="background-color: #FCBA12">UNIT</td>
+                <td class="rowTitle" style="background-color: #FCBA12">SIZE</td>
             </tr>
-            <tr style="height: 2cm">
-                <td style="text-align: center">{{ shipmentRegister.supplier }}</td>
-                <td style="text-align: center">{{ shipmentRegister.quanty }}</td>
-                <td style="text-align: center">{{ shipmentRegister.unit }}</td>
-                <td style="text-align: center">{{ shipmentRegister.size }}</td>
-            </tr>
-
             <tr>
-                <td class="rowTitle">{{ shipmentRegister.weight.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.in_date.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.warehouse.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.by.label_tag }}</td>
-            </tr>
-            <tr style="height: 2cm">
-                <td style="text-align: center">{{ shipmentRegister.weight }}</td>
-                <td style="text-align: center">{{ shipmentRegister.in_date }}</td>
-                <td style="text-align: center">{{ shipmentRegister.warehouse }}</td>
-                <td style="text-align: center">{{ shipmentRegister.by }}</td>
-            </tr>
-
-            <tr>
-                <td class="rowTitle">{{ shipmentRegister.BLno.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.port.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.out_date.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.remark.label_tag }}</td>
-            </tr>
-            <tr style="height: 2cm">
-                <td style="text-align: center">{{ shipmentRegister.BLno }}</td>
-                <td style="text-align: center">{{ shipmentRegister.port }}</td>
-                <td style="text-align: center">{{ shipmentRegister.out_date }}</td>
-                <td style="text-align: center">{{ shipmentRegister.remark }}</td>
-            </tr>
-
-            <tr>
-                <td class="rowTitle">{{ shipmentRegister.division.label_tag }}</td>
-                <td class="rowTitle">{{ shipmentRegister.job_number.label_tag }}</td>
-                <td class="rowTitle" colspan="2">{{ shipmentRegister.image.label_tag }}</td>
-            </tr>
-            <tr style="height: 2cm">
-                <td style="text-align: center">{{ shipmentRegister.division}}</td>
-                <td style="text-align: center">{{ shipmentRegister.job_number}}</td>
-                <td>
-                    <div style="vertical-align: top; margin-left: 2cm">
-                        {{ shipmentRegister.image}}
+                <td style="text-align-last: center">
+                    <select class="form-select" name="division" id="id_division">
+                        <option value="" selected="">---------</option>
+                        <option value="D">D</option>
+                        <option value="L">L</option>
+                        <option value="B">B</option>
+                    </select>
+                </td>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="job_number" maxlength="50" id="id_job_number">
+                </td>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="quanty" maxlength="10" id="id_quanty">
+                </td>
+                <td style="text-align-last: center">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" name="unit" maxlength="10" id="id_unit" style="font-size: 12px;">
+                        </div>
+                        <select id="units" class="form-select" name="units" style="width: 2cm">
+                            {% for u in allUnits %}
+                                <option value="{{ u }}">{{ u }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <div style="vertical-align: middle; margin-left: 2cm">
-                        {{ shipmentRegister.image1}}
+                </td>
+                <td style="text-align-last: center">
+                    <textarea name="size" class="form-control" cols="40" rows="10" maxlength="100" style="height:1cm" id="id_size"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="rowTitle" style="background-color: #FCBA12">WEIGHT</td>
+                <td class="rowTitle" style="background-color: #FCBA12">IN</td>
+                <td class="rowTitle" style="background-color: #FCBA12">W/H 1</td>
+                <td class="rowTitle" style="background-color: #FCBA12">W/H 2</td>
+                <td class="rowTitle" style="background-color: #FCBA12">BY</td>
+            </tr>
+            <tr>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="weight" maxlength="10"  id="id_weight">
+                </td>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="in_date" value="" placeholder="YYYYMMDD"  id="id_in_date">
+                </td>
+                <td style="text-align-last: center">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" name="warehouse" maxlength="100" class="form-control" id="id_warehouse" style="font-size: 12px;">
+                        </div>
+                        <select id="warehouses" name="warehouses" class="form-select">
+                            {% for wh in allWarehouses %}
+                                <option value="{{ wh }}">{{ wh }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <div style="vertical-align: bottom; margin-left: 2cm">
-                        {{ shipmentRegister.image2}}
+                </td>
+                <td style="text-align-last: center">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" name="warehouse2" maxlength="100" id="id_warehouse2" style="font-size: 12px;">
+                        </div>
+                        <select id="warehouses2" class="form-select" name="warehouses2" style="width:2cm">
+                            {% for wh in allWarehouses %}
+                                <option value="{{ wh }}">{{ wh }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+                </td>
+                <td style="text-align-last: center">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" name="by" maxlength="50" id="id_by" style="font-size: 12px;">
+                        </div>
+                        <select id="bys" class="form-select" name="bys" style="width:2cm" >
+                            {% for b in allBys %}
+                                <option value="{{ b }}">{{ b }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            {% if shipmentRegister.in_date.errors %}
+                <tr>
+                    <td></td>
+                    <td><strong style="color: red; text-align: center">{{ shipmentRegister.in_date.errors|striptags }}</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td class="rowTitle" style="background-color: #FCBA12">BLNO</td>
+                <td class="rowTitle" style="background-color: #FCBA12">PORT</td>
+                <td class="rowTitle" style="background-color: #FCBA12">OUT</td>
+                <td class="rowTitle" style="background-color: #FCBA12">REMARK</td>
+                <td class="rowTitle" style="background-color: #FCBA12">MEMO</td>
+            </tr>
+            <tr>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="BLno" maxlength="50" id="id_BLno">
+                </td>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="port" maxlength="100" id="id_port">
+                </td>
+                <td style="text-align-last: center">
+                    <input type="text" class="form-control" name="out_date" placeholder="YYYYMMDD" id="id_out_date">
+                </td>
+                <td style="text-align-last: center">
+                    <textarea name="remark" class="form-control" cols="40" rows="10" maxlength="500" style="height:1cm" id="id_remark"></textarea>
+                </td>
+                <td style="text-align-last: center">
+                    <textarea name="memo" class="form-control" cols="40" rows="10" maxlength="1000" style="height:1cm" id="id_memo"></textarea>
+                </td>
+            </tr>
+            {% if shipmentRegister.out_date.errors %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><strong style="color: red; text-align: center">{{ shipmentRegister.out_date.errors|striptags }}</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td class="rowTitle" colspan="2" style="background-color: #FCBA12">PDF</td>
+                <td class="rowTitle" colspan="2" style="background-color: #FCBA12">IMG</td>
+                <td class="rowTitle" style="background-color: #FCBA12">ACTION</td>
+            </tr>
+            <tr>
+                <td style="text-align: center" colspan="2">
+                    <div class="input-group">
+                        <input type="file" class="form-control " name="pdf_file"  id="id_pdf_file">
+                        <div class="input-group-append">
+                            <button id="clearPdf" name="clearPdf" onclick="clearPdf()" class="btn btn-secondary btn-sm">Clear PDF File</button>
+                        </div>   
+                    </div>         
+                </td>
+                <td colspan="2">
+                    <div class="input-group">
+                        <input type="file" class="form-control " name="image" accept="image/*" id="id_image">
+                        <div class="input-group-append">
+                            <button id="clearImage" name="clearImage" onclick="clearImage()" class="btn btn-secondary btn-sm">Clear Image</button>
+                        </div>   
+                    </div>  
+                    <!-- </div> -->
+<!--                     <div style="vertical-align: middle" class="mb-1">
+                        <input type="file" class="form-control form-control-sm" name="image1" accept="image/*" id="id_image1">
+                    </div>
+                    <div style="vertical-align: bottom;">
+                        <input type="file" class="form-control form-control-sm" name="image2" accept="image/*" id="id_image2">
+                    </div> -->
                 </td>
                 <td>
-                    <div style="vertical-align: top; margin-left: 2cm">
-                        <button id="clearImage" name="clearImage" onclick="clearImage()" class="buttonOkay">Clear Image</button>
-                    </div>
-                    <div style="vertical-align: middle; margin-left: 2cm">
-                        <button id="clearImage1" name="clearImage1" onclick="clearImage1()" class="buttonOkay">Clear Image</button>
-                    </div>
-                    <div style="vertical-align: bottom; margin-left: 2cm">
-                        <button id="clearImage2" name="clearImage2" onclick="clearImage2()" class="buttonOkay">Clear Image</button>
-                    </div>
+                    <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example"> -->
+                        <button type="submit" id="addShipment" name="addShipment" onclick="addShipmentOrder()" class="btn btn-success " style="width: 3cm;">Save</button>
+                        <button type="submit" id="changeShipment" name="changeShipment" onclick="changeShipmentOrder()" class="btn btn-dark " style="width: 3cm">Update</button>
+                    <!-- </div> -->
                 </td>
-            </tr>
-
-            <tr>
-                <td class="rowTitle">{{ shipmentRegister.pdf_file.label_tag }}</td>
-                <td class="rowTitle"></td>
-                <td class="rowTitle"></td>
-                <td class="rowTitle"></td>
-            </tr>
-            <tr style="height: 1.2cm">
-                <td>
-                    <div style="margin-left: 1cm">
-                        {{ shipmentRegister.pdf_file }}
-                    </div>
-                </td>
-                <td>
-                    <div style="vertical-align: top; margin-left: 2cm">
-                        <button id="clearPdf" name="clearPdf" onclick="clearPdf()" class="buttonOkay">Clear PDF File</button>
-                    </div>
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <div style="text-align: right; margin-right: 1cm">
-                        <button type="submit" id="addShipment" name="addShipment" onclick="addShipmentOrder()" class="buttonAccept">Add</button>
-{#                        <button type="submit" id="changeShipment" name="changeShipment" onclick="changeShipmentOrder()" class="buttonOkay">Update</button>#}
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="4">{{ shipmentRegister.messages }}</td>
             </tr>
         </tbody>
-
     </table>
-
 </form>
 
 <script>
@@ -145,8 +255,26 @@
         return str == str.toUpperCase() && str != str.toLowerCase();
     }
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + mm + dd;
+    document.getElementById('id_in_date').value = today;
+
     let companySmartCell = document.getElementById('{{ shipmentRegister.company.auto_id }}');
     let vesselListCell = document.getElementById('pickVessel');
+    let unitSmartCell = document.getElementById('{{ shipmentRegister.unit.auto_id }}');
+    let unitListCell = document.querySelector('#units');
+    {#let unitListCell = document.getElementById('pickUnit');#}
+    let whSmartCell = document.getElementById('{{ shipmentRegister.warehouse.auto_id }}');
+    let wh2SmartCell = document.getElementById('{{ shipmentRegister.warehouse2.auto_id }}');
+    let whListCell = document.querySelector('#warehouses');
+    let wh2ListCell = document.querySelector('#warehouses2');
+    {#let whListCell = document.getElementById('pickWH');#}
+    let bySmartCell = document.getElementById('{{ shipmentRegister.by.auto_id }}');
+    let byListCell = document.querySelector('#bys');
+
     let vesselKey = '{{ vessel_key }}';
     vesselListCell.onchange = function () {
         var companyName = "";
@@ -158,6 +286,34 @@
             } else break;
         }
         companySmartCell.value = companyName;
+    }
+    unitListCell.onchange = function () {
+        if (unitListCell.value!=="Select") {
+            unitSmartCell.value = unitListCell.value;
+        } else {
+            unitSmartCell.value = "";
+        }
+    }
+    whListCell.onchange = function () {
+        if (whListCell.value!=="Select") {
+            whSmartCell.value = whListCell.value;
+        } else {
+            whSmartCell.value = "";
+        }
+    }
+    wh2ListCell.onchange = function () {
+        if (wh2ListCell.value!=="Select") {
+            wh2SmartCell.value = wh2ListCell.value;
+        } else {
+            wh2SmartCell.value = "";
+        }
+    }
+    byListCell.onchange = function () {
+        if (byListCell.value!=="Select") {
+            bySmartCell.value = byListCell.value;
+        } else {
+            bySmartCell.value = "";
+        }
     }
 
     function clearImage(){
@@ -173,4 +329,25 @@
         document.getElementById('{{shipmentRegister.pdf.auto_id}}').value= null;
     }
 
+    $("#id_out_date").datepicker({
+        format: "yyyymmdd",
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    $("#id_in_date").datepicker({
+        format: "yyyymmdd",
+        todayHighlight: true,
+        autoclose: true,
+    });
 </script>
+
+<!-- <script>
+        // suppose the `id` attribute of element is `message_container`.
+    var message_ele = document.getElementById("message_container");
+
+    setTimeout(function(){
+       message_ele.style.display = "none";
+    }, 3000);
+    // Timeout is 3 sec, you can change it
+</script> -->

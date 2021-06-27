@@ -1,14 +1,24 @@
 {% extends "body.html" %}
 
 {% block bodyContent %}
-
-    {% include "operatorForm.html" %}
-    {% include "operatorList.html" %}
-
-    {% include "supplierForm.html" %}
-    {% include "supplierList.html" %}
-
-    {% include "companyForm.html" %}
-    {% include "companyList.html" %}
-
+<div class="container-fluid col-7">
+	<div class="row">
+		{% include "operatorForm.html" %}
+	</div>
+	<div class="row">
+		{% include "operatorList.html" %}
+	</div>
+	<div class="row ">
+		{% include "supplierForm.html" %}
+	</div>
+	<div class="row">
+		{% include "supplierList.html" %}
+	</div>
+	<div class="row">
+		{% include "companyForm.html" %}
+	</div>
+	<div class="row">
+		{% include "companyList.html" %}
+	</div>
+</div>
 {% endblock bodyContent %}

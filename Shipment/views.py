@@ -1,8 +1,7 @@
-from django.core import serializers
 from django.core.paginator import Paginator
 
 from Shipment.models import Shipment, ShipmentFilter
-from shipment_forms import ShipmentRegistration, ShipmentModification
+from shipment_forms import ShipmentRegistration, ShipmentModification, WarehouseFilter
 
 
 RESULT_PER_PAGE = 100
@@ -25,6 +24,7 @@ def shipmentRegisterView(request):
 def shipmentFilterView(request):
     shipmentList = Shipment.objects.all().order_by("-number")
     formShipmentFilter = ShipmentFilter(request.GET, queryset=shipmentList)
+    warehouseFilter = request.GET.get('wh')
 
     paginator = Paginator(formShipmentFilter.qs, RESULT_PER_PAGE)
     page = request.GET.get('page')
@@ -32,6 +32,21 @@ def shipmentFilterView(request):
     result = {
         "shipmentFilter": formShipmentFilter,
         "shipmentDisplay": pagination,
+        "shipmentResults": formShipmentFilter.qs,
+    }
+    return result
+
+
+def warehouseFilterView(request):
+    # IF this is POST request:
+    if request.method == "POST":
+        warehouseFilter = WarehouseFilter(request.POST)
+    # ELSE when this is GET request:
+    else:
+        warehouseFilter = WarehouseFilter(request.GET)
+
+    result = {
+        "warehouseFilter": warehouseFilter,
     }
     return result
 

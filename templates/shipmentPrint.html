@@ -1,0 +1,76 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href={% static "css/main-m.css" %}>
+
+<!DOCTYPE html>
+<style>
+    table,
+    th,
+    td {
+        padding: 5px;
+        font-size: 12px;
+        text-align: center;
+        border-collapse: collapse;
+    }
+</style>
+<table id="shipmentPrinted" style="outline: 3px solid black; outline-offset: 2px">
+    <col style="width: 4cm">
+    <col style="width: 4cm">
+    <col style="width: 3cm">
+    <col style="width: 5cm">
+    <col style="width: 4cm">
+    <col style="width: 1cm">
+    <col style="width: 2cm">
+    <col style="width: 2cm">
+    <col style="width: 3cm">
+    <col style="width: 3cm">
+
+    <tr>
+{#        <th colspan="10">#}
+{#            <div style="text-align: left">#}
+{#                <p style="display:inline">Vessel: {{ vesselPrinted }}</p>#}
+{#                <p style="display:inline; margin-left: 16cm">Total Package: {{ totalQuanty }} pkgs</p>#}
+{#                <p style="display:inline; margin-left: 1cm">Total Weight: {{ totalWeight }} kgs</p>#}
+{#            </div>#}
+{#        </th>#}
+        <th colspan="4" style="text-align: left; border-right: none">Vessel: {{ vesselPrinted }}</th>
+        <th colspan="6" style="border-left: none">
+            <div style="margin-right: 2cm">
+                <p style="display: inline">Total Package: {{ totalQuanty }} pkgs</p>
+                <p style="display: inline; margin-left: 1cm">Total Weight: {{ totalWeight }} kgs</p>
+            </div>
+        </th>
+    </tr>
+    <tr>
+        <th style="border: 3px solid black">COMPANY</th>
+        <th style="border: 3px solid black">VESSEL</th>
+        <th style="border: 3px solid black">DOC</th>
+        <th style="border: 3px solid black">ODR</th>
+        <th style="border: 3px solid black">SUPPLIER</th>
+        <th style="border: 3px solid black">QTY</th>
+        <th style="border: 3px solid black">SIZE</th>
+        <th style="border: 3px solid black">WEIGHT</th>
+        <th style="border: 3px solid black">IN</th>
+        <th style="border: 3px solid black">REMARK</th>
+    </tr>
+
+    {% for sh in shipmentPrinted %}
+    <tr>
+        <td style="border: 3px solid black">{{ sh.company }}</td>
+        <td style="border: 3px solid black">{{ sh.vessel }}</td>
+        <td style="border: 3px solid black">{{ sh.docs }}</td>
+        <td style="border: 3px solid black">{{ sh.odr }}</td>
+        <td style="border: 3px solid black">{{ sh.supplier }}</td>
+        <td style="border: 3px solid black">{{ sh.quanty }}</td>
+        <td style="border: 3px solid black">{{ sh.size }}</td>
+        <td style="border: 3px solid black">{{ sh.weight }}</td>
+        <td style="border: 3px solid black">{{ sh.in_date|date:"Y-m-d" }}</td>
+        <td style="border: 3px solid black">{{ sh.remark }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<script>
+    window.print();
+</script>

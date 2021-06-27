@@ -1,12 +1,28 @@
 {% extends "body.html" %}
 
 {% block bodyContent %}
-    <div style="text-align: center">
-        <h3>LOGIN SUCCEEDED!</h3>
 
-        <p>Welcome, {{ customerExist.userID }}</p>
-        <p>To continue, please <a href="{% url "mainPage2" %}">click here</a></p>
+<div class="d-flex justify-content-center">
+	<div style="text-align: center; border-radius: 10px; box-shadow: 0px 4px 20px rgba(5,57,94,1); -moz-box-shadow: 0px 4px 20px rgba(5,57,94,1);-webkit-box-shadow: 0px 4px 20px rgba(5,57,94,1); width: 400px; padding-top: 20px; padding-bottom: 20px">
+
+        <h1 style="margin-bottom: 1cm">Login Successful</h1>
+        <h2>Welcome, {{ customerExist.userID }}</h2>
+        <h2>To continue, please <a href="{% url "mainPage2" %}">click here</a></h2>
 
     </div>
+</div>
 
 {% endblock bodyContent %}
+
+{#{% extends "body.html" %}#}
+{##}
+{#{% block bodyContent %}#}
+{#    <div style="text-align: center">#}
+{#        <h3>LOGIN SUCCEEDED!</h3>#}
+{##}
+{#        <p>Welcome, {{ customerExist.userID }}</p>#}
+{#        <p>To continue, please <a href="{% url "mainPage2" %}">click here</a></p>#}
+{##}
+{#    </div>#}
+{##}
+{#{% endblock bodyContent %}#}

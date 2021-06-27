@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>title</title>
+</head>
+<body>
+<h2>Firebase web push notification</h 2> 
+
+<p id="token"></p>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-messaging.js"></script>
+<script type="text/javascript">
+	var firebaseConfig = {
+	    apiKey: "AIzaSyDgARUKidNoH2Vwrld8NeZwu02pr67msG8",
+	    authDomain: "noti1-23f83.firebaseapp.com",
+	    projectId: "noti1-23f83",
+	    storageBucket: "noti1-23f83.appspot.com",
+	    messagingSenderId: "332004615889",
+	    appId: "1:332004615889:web:47364dbd2f1a18a64887f0"
+  	};
+	firebase.intitializeApp(firebaseConfig)
+	const messaging=firebase.messaging();
+
+	function InitializerFireBaseMessaging() {
+		messaging
+			.requestPermission()
+			.then(function () {
+				console.log("Notification Permission")
+			})
+			.then(function (token) {
+				console.log("Token : "+token);
+				document.getElementById("token").innerHTML=token;
+			})
+	}
+
+	messaging.onMessage(function (payload) {
+		console.log(payload);   
+		const notificationOption={
+			body:payload.noificaition.body,
+			icon:payload.notification.icon
+		};
+
+		if(Notification.permission=="granted"){
+			var notification=new Notification(payload.notification.title,notificqtionOption);
+
+			notification.onclick=function (ev) {
+				ev.preventDefault();
+				window.open(payload.notificaion.click_action,'_blank');
+				notification.close();
+			}
+		}
+	});
+	messaging.onTokenRefresh(function () {
+		messaging.getToken()
+		.then(function (newtoken) {
+			console.log("New Token : "+ newtoken);
+		})
+		.catch(function (reason) {
+			console.log(reason);
+		})
+	})
+	InitializerFireBaseMessaging();
+</script>
+</body>
+</html>

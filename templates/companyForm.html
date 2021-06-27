@@ -1,10 +1,10 @@
 <form method="post" style="margin-top: 2cm">{% csrf_token %}
-    <table id="companyForm" style="margin-left: auto; margin-right: auto">
-        <col style="width:5cm">
-        <col style="width:4cm">
-        <col style="width:7cm">
-        <col style="width:5cm">
-        <col style="width:5cm">
+    <table id="companyForm">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:10%">
 
         <div style="text-align: center">
             <formTitle>COMPANY UPDATE FORM</formTitle>
@@ -22,22 +22,20 @@
 
         <tbody>
             <tr style="height: 1.2cm">
-                <td style="text-align: center">{{ companyForm.cpnID }}</td>
-                <td style="text-align: center">{{ companyForm.cpnName }}</td>
-                <td style="text-align: center">{{ companyForm.cpnEmail }}</td>
-                <td style="text-align: center">{{ companyForm.cpnPassword }}</td>
-{#                <td style="text-align: center">{{ companyForm.companyID }}</td>#}
-{#                <td style="text-align: center">{{ companyForm.companyName }}</td>#}
-{#                <td style="text-align: center">{{ companyForm.companyEmail }}</td>#}
-{#                <td style="text-align: center">{{ companyForm.CPNpassword }}</td>#}
+                <td style="text-align-last: center"><input type="text" name="cpnID" class="form-control" required="" id="id_cpnID" placeholder="Set a new ID"></td>
+                <td style="text-align-last: center"><input type="text" name="cpnName" class="form-control" required="" id="id_cpnName" placeholder="Company name"></td>
+                <td style="text-align-last: center"><input type="email" name="cpnEmail" class="form-control" required="" id="id_cpnEmail" placeholder="Email"></td>
+                <td style="text-align-last: center"><input type="text" name="cpnPassword" class="form-control" required="" id="id_cpnPassword" placeholder="Set password"></td>
                 <td style="text-align: center">
-                    <button type="submit" id="saveCompany" name="saveCompany" onclick="saveCpn()" class="buttonAccept">Save/Update</button>
-                    <button type="submit" id="deleteCompany" name="deleteCompany" onclick="deleteCpn()" class="buttonDelete">Delete</button>
+                    <button type="submit" id="saveCompany" name="saveCompany" onclick="saveCpn()" class="btn btn-success">Save/Update</button>
+                    <button type="submit"  id="deleteCompany" name="deleteCompany" onclick="deleteCpn()" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
             <tr style="height: 2cm">
-                <td class="rowTitle">VESSELS:</td>
-                <td colspan="4" style="text-align: center">{{ companyForm.cpnVesselList }}</td>
+                <td class="rowTitle">VESSELS</td>
+                <td colspan="4" style="text-align-last: center">
+                    <textarea name="cpnVesselList" cols="40" rows="10" style="height: 2cm" class="form-control" required="" id="id_cpnVesselList"></textarea>
+                </td>
             </tr>
 
             <tr>

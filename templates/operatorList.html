@@ -1,11 +1,4 @@
-<table id="operatorList" style="margin-left: 15%; margin-right: 15%" class="rowHoverStyle">
-{#    <col style="width:7cm">#}
-{#    <col style="width:7cm">#}
-{#    <col style="width:7cm">#}
-    {# Total: 40%; margin: 15% each side#}
-    <col style="width:12%">
-    <col style="width:16%">
-    <col style="width:12%">
+<table id="operatorList" class="rowHoverStyle">
 
     <div style="text-align: center; margin-top: 1cm">
         <formTitle>OPERATOR LIST</formTitle>
@@ -48,12 +41,12 @@
         var oprNumber = oprList.length;
         for (let i = 0; i < oprNumber; i++) {
             operatorContent += '<tr>';
-            operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["userID"] + '</td>';
-            operatorContent += '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold">' + oprList[i]["fields"]["rawPassword"] + '</td>';
+            operatorContent += '<td class="rowInfo cellBorder" style=" font-weight: bold">' + oprList[i]["fields"]["userID"] + '</td>';
+            operatorContent += '<td class="rowInfo cellBorder" style=" font-weight: bold">' + oprList[i]["fields"]["rawPassword"] + '</td>';
             if (oprList[i]["fields"]["permission"] === "Read + Modify") {
-                permissionColored = '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold; color: red">' + oprList[i]["fields"]["permission"] + '</td>';
+                permissionColored = '<td class="rowInfo cellBorder" style=" font-weight: bold; color: red">' + oprList[i]["fields"]["permission"] + '</td>';
             } else {
-                permissionColored = '<td class="rowInfo cellBorder" style="width: 7cm; font-weight: bold; color: gray">' + oprList[i]["fields"]["permission"] + '</td>';
+                permissionColored = '<td class="rowInfo cellBorder" style=" font-weight: bold; color: gray">' + oprList[i]["fields"]["permission"] + '</td>';
             }
             operatorContent += permissionColored;
             operatorContent += '</tr>';

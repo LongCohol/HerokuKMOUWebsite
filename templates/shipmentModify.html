@@ -1,59 +1,156 @@
-<form method="post">{% csrf_token %}
-    <table style="margin-left: auto; margin-right: auto">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
+{% load static %}
 
-        <div style="text-align: center; margin-top: 2cm">
-            <formTitle>UPDATE DATA INPUT</formTitle>
+<link rel="stylesheet" href="{% static 'src/colorPick.css' %}">
+    <!-- The following line applies the dark theme -->
+<!-- <link rel="stylesheet" href="{% static 'src/colorPick.dark.theme.css' %}"> -->
+<style>
+    .picker {
+        border-radius: 5px;
+        width: 1cm;
+        height: 1cm;
+        cursor: pointer;
+        -webkit-transition: all linear .2s;
+        -moz-transition: all linear .2s;
+        -ms-transition: all linear .2s;
+        -o-transition: all linear .2s;
+        transition: all linear .2s;
+        border: thin solid #eee;
+    }
+    .picker:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+<form method="post">{% csrf_token %}
+    <table class="table table-bordered table-sm">
+        <div>
+            <formTitle>- UPDATE DATA INPUT</formTitle>
         </div>
 
         <div>
             <input type="hidden" id="updateList" name="checkedList" value="">
+            <input type="hidden" id="updateColor" name="pickedColor" value="">
         </div>
+
         <tr>
-            <td class="rowTitle">{{ shipmentModify.company.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.vessel.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.supplier.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.warehouse.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.job_number.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.port.label_tag }}</td>
-        </tr>
-        <tr style="height: 1.2cm">
-            <td style="text-align: center">{{ shipmentModify.company }}</td>
-            <td style="text-align: center">{{ shipmentModify.vessel }}</td>
-            <td style="text-align: center">{{ shipmentModify.supplier }}</td>
-            <td style="text-align: center">{{ shipmentModify.warehouse }}</td>
-            <td style="text-align: center">{{ shipmentModify.job_number }}</td>
-            <td style="text-align: center">{{ shipmentModify.port }}</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width: 3cm">DATE IN</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width: 3cm">JOB.NO</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width: 3cm;">DATE OUT</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width: 4cm;">PORT</td>
+            <td class="rowTitle" style="background-color: #FCBA12">STATE</td>
+            <td class="rowTitle" style="background-color: #FCBA12">REMARK</td>
+            <td class="rowTitle" style="background-color: #FCBA12">MEMO</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width:4cm">W/H 1</td>
+            <td class="rowTitle" style="background-color: #FCBA12; width:4cm">W/H 2</td>
         </tr>
         <tr>
-            <td class="rowTitle">{{ shipmentModify.division.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.flag_status.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.in_dateM.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.out_dateM.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentModify.remark.label_tag }}</td>
-            <td class="rowTitle">ACTION</td>
-        </tr>
-        <tr style="height: 2cm">
-            <td style="text-align: center">{{ shipmentModify.division }}</td>
-            <td style="text-align: center">{{ shipmentModify.flag_status }}</td>
-            <td style="text-align: center">{{ shipmentModify.in_dateM }}</td>
-            <td style="text-align: center">{{ shipmentModify.out_dateM }}</td>
-            <td style="text-align: center">{{ shipmentModify.remark }}</td>
-            <td>
-                <div style="text-align: center">
-                    <button type="submit" id="modifyShipment" name="modifyShipment" onclick="modifyShipmentOrder()" class="buttonAccept" style="width: 2cm">Update</button>
-                </div>
-                <div style="text-align: center">
-                    <button type="submit" id="deleteShipment" name="deleteShipment" onclick="deleteShipmentOrder()" class="buttonDelete" style="width: 2cm">Delete</button>
+            <td style="text-align-last: center">
+                <input type="text" class ="form-control" name="in_dateM" placeholder="YYYYMMDD"  id="id_in_dateM">
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class ="form-control" name="job_numberM" id="id_job_numberM">
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class ="form-control" name="out_dateM" placeholder="YYYYMMDD" id="id_out_dateM">
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class ="form-control" name="portM" id="id_portM">
+            </td>
+            <td style="text-align-last: center">
+                <div class="input-group">
+                    <select name="flag_statusM" class="form-select" id="id_flag_statusM">
+                        <option value="BLANK" selected="">BLANK</option>
+                        <option value="STAY2">STAY2</option>
+                        <option value="START">START</option>
+                        <option value="COMPLETED">COMPLETED</option>
+                        <option value="STAY">STAY1</option>
+                    </select>
+                    <div class="picker" id="picker1"></div>
                 </div>
             </td>
+            <td style="text-align: center">
+                <input type="text" class ="form-control" name="remarkM" id="id_remarkM">
+            </td>
+            <td style="text-align: center">
+                <input type="text" class ="form-control" name="memoM" id="id_memoM" >
+            </td>
+            <td style="text-align: center">
+                <input list="warehousesM" class ="form-select" name ="warehouseM" type="text" id="changeWH" >
+                <datalist id="warehousesM">
+                    {% for wh in allWarehouses %}
+                        <option value="{{ wh }}">
+                    {% endfor %}
+                </datalist>
+            </td>
+            <td style="text-align: center">
+                <input list="warehouses2M" class ="form-select" name ="warehouses2M" type="text" id="changeWH2">
+                <datalist id="warehouses2M">
+                    {% for wh in allWarehouses %}
+                        <option value="{{ wh }}">
+                    {% endfor %}
+                </datalist>
+            </td>
         </tr>
-
+<!--             <tr>
+                <td><strong style="color: red; text-align: center">{{ shipmentModify.in_dateM.errors|striptags }}</strong></td>
+                <td></td>
+                <td><strong style="color: red; text-align: center">{{ shipmentModify.out_dateM.errors|striptags }}</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr> -->
     </table>
 
+    <div class="d-flex justify-content-end">
+        <button type="submit" id="modifyShipment" name="modifyShipment" class="btn btn-success" style="width: 3cm; margin-right: 2px">Save</button>
+        <button type="submit" id="deleteShipment" name="deleteShipment" class="btn btn-danger" style="width: 3cm; margin-right: 2px">Delete</button>
+        <button type="submit" id="printShipment" name="printShipment" class="btn btn-dark" style="width: 3cm; margin-right: 2px;">Export</button>
+        <button type="submit" id="htmlShipment" name="htmlShipment" class="btn btn-dark" style="width: 3cm">Print</button>
+    </div>
 </form>
+
+<script>
+
+$("#id_in_dateM").datepicker({
+    format: "yyyymmdd",
+    todayHighlight: true,
+    autoclose: true,
+});
+
+$("#id_out_dateM").datepicker({
+    format: "yyyymmdd",
+    todayHighlight: true,
+    autoclose: true,
+});
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'src/colorPick.js' %}"></script>
+<script>
+    let colorPicker = document.getElementById('updateColor');
+    let statusPicker = document.getElementById('{{ shipmentModify.flag_statusM.auto_id }}');
+    let colorpicker1 = document.getElementById('picker1');
+    colorpicker1.style.display = "none";
+    colorPicker.value = "";
+    statusPicker.onchange = function(){
+        if (statusPicker.value == "COMPLETED"){
+            colorpicker1.style.display = "block";
+        } else {
+            colorpicker1.style.display = "none";
+        }
+    };
+
+    $("#picker1").colorPick({
+        'initialColor' : '#9BD770',
+        'palette': ["#9BD770", "#E8B5CE", "#EFDDFD", "#FE9F6D", "#FEEC86", "#95DEE3", "#EFE1CE"],
+        'onColorSelected': function() {
+            colorPicker.value = "";
+            this.element.css({'backgroundColor': this.color, 'color': this.color});
+            colorPicker.value = this.color;
+        }
+    });
+</script>

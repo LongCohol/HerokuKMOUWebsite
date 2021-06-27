@@ -19,38 +19,40 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
 
-<div style="text-align: center; margin-top: 2cm">
-    <formTitle>SHIPMENT LIST</formTitle>
+<div style="margin-top: 3cm">
+    <formTitle>- SHIPMENT LIST</formTitle>
 </div>
 
 <form method="post">{% csrf_token %}
 {#<table id="shipmentTable" class="rowHoverStyle table table-border table-hover" style="margin-left: 2cm">#}
-<table id="shipmentTable" class="rowHoverStyle" style="margin-left: 2cm">
+<table id="shipmentTable" class="rowHoverStyle coloredStyle">
+    <col style="width: 0.5cm">
+    <col style="width: 1.7cm">
+    <col style="width: 2cm">
+    <col style="width: 1.5cm">
+    <col style="width: 2.5cm">
+    <col style="width: 2.5cm">
+    <col style="width: 1cm">
     <col style="width: 1cm">
     <col style="width: 2.5cm">
-    <col style="width: 3.5cm">
-    <col style="width: 1cm">
-    <col style="width: 4cm">
-    <col style="width: 4cm">
+    <col style="width: 1.5cm">
+    <col style="width: 2.5cm">
     <col style="width: 1cm">
     <col style="width: 1cm">
-    <col style="width: 4cm">
-    <col style="width: 2cm">
-    <col style="width: 4cm">
-    <col style="width: 2cm">
-    <col style="width: 1cm">
-    <col style="width: 5cm">
-    <col style="width: 3cm">
-    <col style="width: 4cm">
-    <col style="width: 5cm">
-    <col style="width: 5cm">
+    <col style="width: 1.5cm">
+    <col style="width: 1.5cm">
+    <col style="width: 2.5cm">
     <col style="width: 1.5cm">
     <col style="width: 3cm">
-    <col style="width: 3.5cm">
+    <col style="width: 3cm">
+    <col style="width: 1.5cm">
+    <col style="width: 3cm">
+    <col style="width: 1.5cm">
+    <col style="width: 1.5cm">
 
     <thead>
         <tr>
-            <th class="rowTitle"></th>
+            <th class="rowTitle"><input type="checkbox"></th>
             <th class="rowTitle">COMPANY</th>
             <th class="rowTitle">VESSEL</th>
             <th class="rowTitle">DOC</th>
@@ -67,16 +69,22 @@
             <th class="rowTitle">PORT</th>
             <th class="rowTitle">OUT</th>
             <th class="rowTitle">REMARK</th>
+            <th class="rowTitle">MEMO</th>
             <th class="rowTitle">JOB NO</th>
             <th class="rowTitle">STATUS</th>
+            <th class="rowTitle">IMAGE</th>
             <th class="rowTitle">USER CREATED</th>
             <th class="rowTitle">USER MODIFIED</th>
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="bodyHoverStyle">
+    <tr style="margin-right: 1cm">
+{#        <td colspan="22" style="color:red; text-align:right; background-color:white">TOTAL: {{ totalShipments }}</td>#}
+        <td colspan="23" style="color:red; text-align:right; background-color:white">TOTAL: {{ totalResults }}</td>
+    </tr>
     {% for info in shipmentDisplay %}
-    <tr>
+    <tr style="background-color: {{ info.colorpick }}">
         <td class="cellBorder"><input type="checkbox" name="selection" id="selection" value="{{ info.number }}"></td>
 
         {% if info.division == "B" %}
@@ -89,13 +97,21 @@
             <td class="cellBorder divisionB">{{info.unit}}</td>
             <td class="cellBorder divisionB">{{info.size}}</td>
             <td class="cellBorder divisionB">{{info.weight}}</td>
-            <td class="cellBorder divisionB">{{info.in_date}}</td>
-            <td class="cellBorder divisionB">{{info.warehouse}}</td>
+            <td class="cellBorder divisionB">{{info.in_date|date:"Y-m-d"}}</td>
+            {% if info.warehouse2 %}
+                <td class="cellBorder divisionB">{{info.warehouse2}}</td>
+            {% else %}
+                <td class="cellBorder divisionB">{{info.warehouse}}</td>
+            {% endif %}
             <td class="cellBorder divisionB">{{info.by}}</td>
             <td class="cellBorder divisionB">{{info.BLno}}</td>
             <td class="cellBorder divisionB">{{info.port}}</td>
-            <td class="cellBorder divisionB">{{info.out_date}}</td>
+{#            <td class="cellBorder divisionB">{{info.out_date}}</td>#}
+            <td class="cellBorder divisionB">
+                {{ info.out_date|date:"Y-m-d"|default_if_none:'' }}
+            </td>
             <td class="cellBorder divisionB">{{info.remark}}</td>
+            <td class="cellBorder divisionB">{{info.memo}}</td>
             <td class="cellBorder divisionB">{{info.job_number}}</td>
         {% elif  info.division == "L" %}
             <td class="cellBorder divisionL">{{info.company}}</td>
@@ -107,13 +123,21 @@
             <td class="cellBorder divisionL">{{info.unit}}</td>
             <td class="cellBorder divisionL">{{info.size}}</td>
             <td class="cellBorder divisionL">{{info.weight}}</td>
-            <td class="cellBorder divisionL">{{info.in_date}}</td>
-            <td class="cellBorder divisionL">{{info.warehouse}}</td>
+            <td class="cellBorder divisionL">{{info.in_date|date:"Y-m-d"}}</td>
+            {% if info.warehouse2 %}
+                <td class="cellBorder divisionL">{{info.warehouse2}}</td>
+            {% else %}
+                <td class="cellBorder divisionL">{{info.warehouse}}</td>
+            {% endif %}
             <td class="cellBorder divisionL">{{info.by}}</td>
             <td class="cellBorder divisionL">{{info.BLno}}</td>
             <td class="cellBorder divisionL">{{info.port}}</td>
-            <td class="cellBorder divisionL">{{info.out_date}}</td>
+{#            <td class="cellBorder divisionL">{{info.out_date}}</td>#}
+            <td class="cellBorder divisionL">
+                {{ info.out_date|date:"Y-m-d"|default_if_none:'' }}
+            </td>
             <td class="cellBorder divisionL">{{info.remark}}</td>
+            <td class="cellBorder divisionL">{{info.memo}}</td>
             <td class="cellBorder divisionL">{{info.job_number}}</td>
         {% else %}
             <td class="cellBorder">{{info.company}}</td>
@@ -125,25 +149,41 @@
             <td class="cellBorder">{{info.unit}}</td>
             <td class="cellBorder">{{info.size}}</td>
             <td class="cellBorder">{{info.weight}}</td>
-            <td class="cellBorder">{{info.in_date}}</td>
-            <td class="cellBorder">{{info.warehouse}}</td>
+            <td class="cellBorder">{{info.in_date|date:"Y-m-d"}}</td>
+            {% if info.warehouse2 %}
+                <td class="cellBorder">{{info.warehouse2}}</td>
+            {% else %}
+                <td class="cellBorder">{{info.warehouse}}</td>
+            {% endif %}
             <td class="cellBorder">{{info.by}}</td>
             <td class="cellBorder">{{info.BLno}}</td>
             <td class="cellBorder">{{info.port}}</td>
-            <td class="cellBorder">{{info.out_date}}</td>
+            <td class="cellBorder">
+                {{ info.out_date|date:"Y-m-d"|default_if_none:'' }}
+            </td>
             <td class="cellBorder">{{info.remark}}</td>
+            <td class="cellBorder">{{info.memo}}</td>
             <td class="cellBorder">{{info.job_number}}</td>
         {% endif %}
 
         {% if info.flag_status == "STAY" %}
-            <td class="cellBorder"><img class="statusIcon" src={% static "images/stay.png" %} alt="STAY"></td>
+            <td class="cellBorder"><img class="statusIcon" src={% static "images/stay1.png" %} alt="STAY1"></td>
+        {% elif info.flag_status == "STAY2" %}
+            <td class="cellBorder"><img class="statusIcon" src={% static "images/stay2.png" %} alt="STAY2"></td>
         {% elif info.flag_status == "START" %}
-            <td class="cellBorder"><img class="statusIcon" src={% static "images/start.png" %} alt="START"></td>
+            <td class="cellBorder"><img class="statusIcon" src={% static "images/start1.png" %} alt="START"></td>
         {% elif info.flag_status == "COMPLETED" %}
-            <td class="cellBorder"><img class="statusIcon" src={% static "images/completed.png" %} alt="COMPLETED"></td>
+            <td class="cellBorder"><img class="statusIcon" src={% static "images/completed2.png" %} alt="COMPLETED"></td>
         {% else %}
             <td class="cellBorder"></td>
         {% endif %}
+        <td class="cellBorder">
+            {% if info.image %}
+                <a href="{{info.image.url}}" target="_blank">
+                    <img src="{{ info.image.url }}" style="width: 3cm; height: 2cm">
+                </a>
+            {% endif %}
+        </td>
         <td class="cellBorder">{{ info.insert_org }}</td>
         <td class="cellBorder">{{ info.correct_org }}</td>
     </tr>
@@ -178,10 +218,26 @@
     const shipmentRows = shipmentTable.getElementsByTagName('tr');
 
     var shipmentUpdateList = document.getElementById('updateList');
+    var shipmentChangeList = document.getElementById('changeList');
     var checkList = [];
+    shipmentUpdateList.value = ""
+    shipmentChangeList.value = ""
+
+    function tickBoxes() {
+        if (this.checked) {
+            checkList.push(this.value)
+            shipmentUpdateList.value += ',';
+            shipmentUpdateList.value += this.value;
+        } else {
+            var r = checkList.indexOf(this.value);
+            checkList.splice(r, 1);
+        }
+    }
+
     var checkBoxes = shipmentTable.getElementsByTagName('input');
-    for (let i = 0;i < checkBoxes.length; i++) {
-        checkBoxes[i].onclick = function () {
+    checkBoxes[0].addEventListener('change', function() {
+        for (let i = 1; i < checkBoxes.length; i++) {
+            checkBoxes[i].checked = this.checked;
             if (checkBoxes[i].checked) {
                 checkList.push(checkBoxes[i].value)
                 shipmentUpdateList.value += ',';
@@ -191,6 +247,9 @@
                 checkList.splice(index, 1);
             }
         }
+    })
+    for (let i = 1;i < checkBoxes.length; i++) {
+        checkBoxes[i].addEventListener("change", tickBoxes)
     }
 
     let infoShp1 = document.getElementById('{{ shipmentRegister.company.auto_id }}');
@@ -210,22 +269,23 @@
     let infoShp14 = document.getElementById('{{ shipmentRegister.port.auto_id }}');
     let infoShp15 = document.getElementById('{{ shipmentRegister.out_date.auto_id }}');
     let infoShp16 = document.getElementById('{{ shipmentRegister.remark.auto_id }}');
-    let infoShp17 = document.getElementById('{{ shipmentRegister.division.auto_id }}');
+    {#let infoShp17 = document.getElementById('{{ shipmentRegister.division.auto_id }}');#}
+    let infoShp17 = document.getElementById('{{ shipmentRegister.memo.auto_id }}');
     let infoShp18 = document.getElementById('{{ shipmentRegister.job_number.auto_id }}');
-    let infoShp19 = document.getElementById('{{ shipmentRegister.image.auto_id }}');
-    let infoShp20 = document.getElementById('{{ shipmentRegister.image1.auto_id }}');
-    let infoShp21 = document.getElementById('{{ shipmentRegister.image2.auto_id }}');
-    let infoShp22 = document.getElementById('{{ shipmentRegister.pdf_file.auto_id }}');
+    {#let infoShp19 = document.getElementById('{{ shipmentRegister.image.auto_id }}');#}
+    {#let infoShp20 = document.getElementById('{{ shipmentRegister.image1.auto_id }}');#}
+    {#let infoShp21 = document.getElementById('{{ shipmentRegister.image2.auto_id }}');#}
+    {#let infoShp22 = document.getElementById('{{ shipmentRegister.pdf_file.auto_id }}');#}
 
-    for (let i = 0; i < shipmentCells.length; i++) {
+    for (let i = 1; i < shipmentCells.length; i++) {
         // Make function onclick for any cells
         let cell = shipmentCells[i];
         cell.onclick = function () {
             // Get the row id where the cell exists
             let rowId = this.parentNode.rowIndex;
             let rowSelected = shipmentTable.getElementsByTagName('tr')[rowId];
-
             // Get data from the row as HTML style
+            shipmentChangeList.value = checkBoxes[rowId-1].value;
             var shp1 = rowSelected.cells[1].innerHTML;
             var shp2 = rowSelected.cells[2].innerHTML;
             var shp3 = rowSelected.cells[3].innerHTML;
@@ -235,14 +295,15 @@
             var shp7 = rowSelected.cells[7].innerHTML;
             var shp8 = rowSelected.cells[8].innerHTML;
             var shp9 = rowSelected.cells[9].innerHTML;
-            var shp10 = rowSelected.cells[10].innerHTML;
+            var shp10 = rowSelected.cells[10].innerHTML; shp10 = shp10.trim();
             var shp11 = rowSelected.cells[11].innerHTML;
             var shp12 = rowSelected.cells[12].innerHTML;
             var shp13 = rowSelected.cells[13].innerHTML;
             var shp14 = rowSelected.cells[14].innerHTML;
-            var shp15 = rowSelected.cells[15].innerHTML;
+            var shp15 = rowSelected.cells[15].innerHTML; shp15 = shp15.trim();
             var shp16 = rowSelected.cells[16].innerHTML;
             var shp17 = rowSelected.cells[17].innerHTML;
+            var shp18 = rowSelected.cells[18].innerHTML;
             // Auto-fill the form with the cleaned data
             infoShp1.value = shp1;
             infoShp2.value = shp2;
@@ -253,29 +314,18 @@
             infoShp7.value = shp7;
             infoShp8.value = shp8;
             infoShp9.value = shp9;
-            infoShp10.value = shp10;
+            infoShp10.value = shp10.substr(0,4) + shp10.substr(5,2) + shp10.substr(8,2);
             infoShp11.value = shp11;
             infoShp12.value = shp12;
             infoShp13.value = shp13;
             infoShp14.value = shp14;
-            infoShp15.value = shp15;
+            infoShp15.value = shp15.substr(0,4) + shp15.substr(5,2) + shp15.substr(8,2);
             infoShp16.value = shp16;
             infoShp17.value = shp17;
+            infoShp18.value = shp18;
+            if (cell.cellIndex==1) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
-    }
-
-    function resetFilterShipmentOrder() {
-        let filterRows = document.getElementById('shipmentFilter').getElementsByTagName('tr');
-        document.getElementById('{{ shipmentFilter.form.in_date_range.auto_id }}').value = "";
-        document.getElementById('{{ shipmentFilter.form.company.auto_id }}').value = "";
-        document.getElementById('{{ shipmentFilter.form.supplier.auto_id }}').value = "";
-        document.getElementById('{{ shipmentFilter.form.vessel.auto_id }}').value = "";
-        document.getElementById('{{ shipmentFilter.form.warehouse.auto_id }}').value = "";
-        document.getElementById('{{ shipmentFilter.form.job_number.auto_id }}').value = "";
-        for (let i = 0; i < 5; i++) {
-            alert(filterRows[1].children[i].value);
-            filterRows[1].cells[i].value = "";
-        }
-        location.href = "http://127.0.0.1:8000/main_page_staff/";
     }
 </script>

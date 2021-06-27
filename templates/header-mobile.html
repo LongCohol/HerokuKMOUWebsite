@@ -2,31 +2,71 @@
 
 {#<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>#}
 <link rel="stylesheet" type="text/css" href={% static "css/main-m.css" %}>
+
 <!-- Title of the page -->
-<title>SmartIndo - sharing economy solution</title>
+<title>SL - SEA & AIR</title>
 <!-- Make container for logo and navigation -->
-<div class="container-fluid headerPart">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="d-flex justify-content-around"> <!-- Make row for flex items -->
-            <div>
-                <a class="navbar-brand" href="#">
-                    <img src={% static "images/logo-mobile.jpg" %} alt="SmartIndoSystem" width="138" height="78">
-                </a>
-            </div>
-        </div>
-      
-        <div class="flex-grow-1">
-            <!-- Navigation bar on the header, expanding when the screen is large, justifying to right -->
-            <nav class="navbar navbar-expand-lg" style="justify-content: flex-end">
-            <!-- Add links to navbar -->
-                <ul class="nav">
-                    {% if request.user.is_authenticated %}
-                    	{% include "navmobLogged.html" %}
-                    {% else %}
-                    	{% include "navmobUnlogged.html" %}
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-    </nav>
-</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 4 Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md " style="background-color: #FFF5DC;">
+  <!-- Brand -->
+  <a href="{% url "frontpage" %}">
+   <img src="/static_files/images/logo-mobile.png" alt="" width="130" height="70" loading="lazy">
+    </a>
+<!--   <a class="navbar-brand mb-0 h1" href="#">SL SEA AND AIR</a> -->
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+            {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link linkHeader" href="{% url "logged_out" %}" style="color: #cc0000; font-weight: bold; text-align: right" >LOGOUT</a>
+              </li>
+              {% if request.user.isOpr %}
+                <li class="nav-item">
+                  <a class="nav-link linkHeader" href="{% url "mainPage1" %}" style="color: green; font-weight: bold; text-align: right">HOME</a>
+                </li>
+              {% elif request.user.isSpl %}
+                <li class="nav-item">
+                  <a class="nav-link linkHeader" href="{% url "mainPage2" %}" style="color: green; font-weight: bold; text-align: right">HOME</a>
+                </li>
+              {% elif request.user.isCpn %}
+                <li class="nav-item">
+                  <a class="nav-link linkHeader" href="{% url "mainPage2" %}" style="color: green; font-weight: bold; text-align: right">HOME</a>
+                </li>
+              {% endif %}
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link linkHeader" href="{% url "frontpage" %}" style="color: green; font-weight: bold; text-align: right">HOME</a>
+              </li>
+            {% endif %}
+            {% if request.user.permission == "Read + Modify" %}
+              <li class="nav-item">
+                <a class="nav-link linkHeader" href="{% url "adminPage" %}" style="color: black; font-weight: bold; text-align: right">SETTINGS</a>
+              </li>
+            {% endif %}
+
+    </ul>
+  </div>
+</nav>
+
+</body>
+</html>

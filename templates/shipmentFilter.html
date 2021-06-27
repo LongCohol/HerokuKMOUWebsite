@@ -1,67 +1,127 @@
-<form method="get">
-    <table id="shipmentFilter" style="margin-left: auto; margin-right: auto">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-        <col style="width: 6cm">
-{#        <col style="width: 6cm">#}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-        <div style="text-align: center; margin-top: 2cm">
-            <formTitle>SEARCH & FILTER</formTitle>
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<form method="get">
+    <table id="shipmentFilter" class="table table-bordered table-sm">
+
+        <div style="margin-top: 0.5cm">
+            <formTitle>- SEARCH & FILTER</formTitle>
         </div>
 
         <tr>
-            <td class="rowTitle">{{ shipmentFilter.form.in_date_range.label_tag }}</td>
-{#            <td class="rowTitle">{{ shipmentFilter.form.companyF.label_tag }}</td>#}
-{#            <td class="rowTitle">{{ shipmentFilter.form.supplierF.label_tag }}</td>#}
-{#            <td class="rowTitle">{{ shipmentFilter.form.vesselF.label_tag }}</td>#}
-{#            <td class="rowTitle">{{ shipmentFilter.form.warehouseF.label_tag }}</td>#}
-{#            <td class="rowTitle">{{ shipmentFilter.form.job_numberF.label_tag }}</td>#}
-            <td class="rowTitle">{{ shipmentFilter.form.company.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.supplier.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.vessel.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.warehouse.label_tag }}</td>
-            <td class="rowTitle">{{ shipmentFilter.form.job_number.label_tag }}</td>
+            <td class="rowTitle" style ="width: 5.5cm ;background-color: #FCBA12">DATE</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">COMPANY</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">SUPPLIER</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">VESSEL</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">ODR NUMBER</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">WAREHOUSE</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">JOB.NUMBER</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">DIVISION</td>
+            <td class="rowTitle" style ="background-color: #FCBA12">STATE</td>
         </tr>
-        <tr style="height: 1.2cm">
-            <td style="text-align: center">{{ shipmentFilter.form.in_date_range }}</td>
-{#            <td style="text-align: center">{{ shipmentFilter.form.companyF }}</td>#}
-{#            <td style="text-align: center">{{ shipmentFilter.form.supplierF }}</td>#}
-{#            <td style="text-align: center">#}
-{#                <input list="vesselsF" type="text" id="pickVesselF" {{ shipmentFilter.form.vesselF }}>#}
-{#                <datalist id="vesselsF">#}
-{#                    {% for vess in allVessels %}#}
-{#                        <option value="{{ vess }}">#}
-{#                    {% endfor %}#}
-{#                </datalist>#}
-{#            </td>#}
-{#            <td style="text-align: center">{{ shipmentFilter.form.warehouseF }}</td>#}
-{#            <td style="text-align: center">{{ shipmentFilter.form.job_numberF }}</td>#}
-            <td style="text-align: center">{{ shipmentFilter.form.company }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.supplier }}</td>
+        <tr>
             <td style="text-align: center">
-                <input list="vesselsF" type="text" id="pickVesselF" {{ shipmentFilter.form.vessel }}>
+                <div class="input-group">
+                    <input type="text" name="in_date_range_min" class="form-control" placeholder="YYYYMMDD" style="font-size: 12px; text-align: center" id="id_in_date_range_0">
+                    <input type="text" name="in_date_range_max" class="form-control" placeholder="YYYYMMDD" style="font-size: 12px; text-align: center" id="id_in_date_range_1">
+                </div>
+            </td>
+            <td style="text-align-last: center">
+                <select name="company" class="form-select" id="id_company">
+                    <option value="" selected="">---------</option>
+                    <option value="SUNRIO">SUNRIO</option>
+                    <option value="STX">STX</option>
+                    <option value="GOLTENS">GOLTENS</option>
+                    <option value="SUNAMI">SUNAMI</option>
+                    <option value="DORVAL">DORVAL</option>
+                    <option value="FORTUNE WILL">FORTUNE WILL</option>
+                    <option value="SAEHAN">SAEHAN</option>
+                    <option value="SHI OCEAN">SHI OCEAN</option>
+                    <option value="INTERGIS">INTERGIS</option>
+                    <option value="POSSM">POSSM</option>
+                    <option value="SEOYANG">SEOYANG</option>
+                    <option value="GOWIN">GOWIN</option>
+                    <option value="CMSHIP">CMSHIP</option>
+                    <option value="CENTRA">CENTRA</option>
+                    <option value="EUCO">EUCO</option>
+                    <option value="MARUBISHI">MARUBISHI</option>
+                    <option value="JW">JW</option>
+                    <option value="MAN">MAN</option>
+                    <option value="KNK">KNK</option>
+                    <option value="DAN MO">DAN MO</option>
+                    <option value="KSS">KSS</option>
+                    <option value="KLCSM">KLCSM</option>
+                    <option value="이강공사">이강공사</option>
+                    <option value="보성상사">보성상사</option>
+                    <option value="오션마린">오션마린</option>
+                    <option value="GLOVIS">GLOVIS</option>
+                </select>
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class="form-control" name="supplier" id="id_supplier" >
+            </td>
+            <td style="text-align-last: center">
+                <input list="vesselsF" class="form-select" name ="vessel" type="text" id="pickVesselF">
                 <datalist id="vesselsF">
                     {% for vess in allVessels %}
                         <option value="{{ vess }}">
                     {% endfor %}
                 </datalist>
             </td>
-            <td style="text-align: center">{{ shipmentFilter.form.warehouse }}</td>
-            <td style="text-align: center">{{ shipmentFilter.form.job_number }}</td>
-        </tr>
-
-        <tr>
-            <td colspan="6">
-                <div style="text-align: right; margin-right: 1cm">
-                    <button type="submit" id="filterShipment" name="filterShipment" onclick="filterShipmentOrder()" class="buttonAccept">Search</button>
-{#                    <button type="submit" id="resetFilter" name="resetFilter" onclick="resetFilterShipmentOrder()" class="buttonOkay">Reset Filter</button>#}
-                </div>
+            <td style="text-align-last: center">
+                <input type="text" class="form-control" name="odr" id="id_odr">
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class="form-control" name="wh" id="id_wh">
+            </td>
+            <td style="text-align-last: center">
+                <input type="text" class="form-control" name="job_number" id="id_job_number">
+            </td>
+            <td style="text-align-last: center">
+                <select name="division" class="form-select" id="id_division">
+                    <option value="" selected="">---------</option>
+                    <option value="B">B</option>
+                    <option value="D">D</option>
+                    <option value="L">L</option>
+                </select>
+            </td>
+            <td style="text-align-last: center">
+                <select name="flag_status" class="form-select" id="id_flag_status">
+                    <option value="" selected="">---------</option>
+                    <option value="BLANK">BLANK</option>
+                    <option value="STAY1">STAY1</option>
+                    <option value="STAY2">STAY2</option>
+                    <option value="START">START</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                </select>
             </td>
         </tr>
-
     </table>
+    <div style="text-align: right">
+        <button type="submit" id="filterShipment" name="filterShipment" onclick="filterShipmentOrder()" class="btn btn-success" style="width: 3cm">Search</button>
+    </div>
+
 
 </form>
+
+<script>
+
+$("#id_in_date_range_0").datepicker({
+    format: "yyyymmdd",
+    todayHighlight: true,
+    autoclose: true,
+});
+
+$("#id_in_date_range_1").datepicker({
+    format: "yyyymmdd",
+    todayHighlight: true,
+    autoclose: true,
+});
+
+</script>

@@ -1,6 +1,9 @@
 {% extends "body.html" %}
 
 {% block bodyContent %}
-    {% include "staffLogin.html" %}
-    {% include "customerLogin.html" %}
+<div class="col">
+	<div class="row mb-5">{% include "staffLogin.html" %}</div>
+	<div class="row mb-5"> {% include "customerLogin.html" %}</div>
+</div>
+
 {% endblock bodyContent %}

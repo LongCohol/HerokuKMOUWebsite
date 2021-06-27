@@ -1,0 +1,25 @@
+{% for message in messages %}
+<!-- <div id = "message_container" class="container-fluid p-0"> -->
+<!-- <div id = "message_container" class="container">
+
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+ -->
+<div id = "message_container">
+	<div class="row justify-content-end">
+		<div class="col-3">
+			<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				{{ message }}
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}

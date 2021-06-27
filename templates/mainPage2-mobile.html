@@ -62,16 +62,17 @@
     <table class="m" id="shipmentTable" style="width: 100%">
     	<thead class="m">
     		<tr class="m">
-    			<th class="m" >STATUS</th>
-				<th class="m" >VESSEL</th>
-				<th class="m" >DOC</th>
-				<th class="m" >ODR</th>
-				<th class="m" >SUPPLIER</th>
-				<th class="m" >QTY</th>
+    			<th class="m">STATUS</th>
+				<th class="m">VESSEL</th>
+				<th class="m">DOC</th>
+				<th class="m">ODR</th>
+				<th class="m">SUPPLIER</th>
+				<th class="m">QTY</th>
 				<th class="m">SIZE</th>
 				<th class="m">WEIGHT</th>
-				<th class="m" >IN</th>
-				<th class="m" >REMARK</th>
+				<th class="m">IN</th>
+				<th class="m">REMARK</th>
+                <th class="m">IMAGE</th>
 			</tr>
 		</thead>
 
@@ -97,9 +98,15 @@
 		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
 		            <td class="m" data-title="Size">{{info.size}}</td>
 		            <td class="m" data-title="Weight">{{info.weight}}</td>
-		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="In date">{{info.in_date|date:"Y-m-d"}}</td>
 		            <td class="m" data-title="Remark">{{info.remark}}</td>
-
+                    <td class="m" data-title="Image">
+                        {% if info.image %}
+                            <a href="{{info.image.url}}" target="_blank">
+                                <img src="{{ info.image.url }}" style="width: 3cm; height: 2cm">
+                            </a>
+                        {% endif %}
+                    </td>
 	        	{% elif  info.division == "L" %}
 	        		<td class="m" data-title="Vessel">{{info.vessel}}</td>
 		            <td class="m" data-title="DOC">{{info.docs}}</td>
@@ -108,8 +115,15 @@
 		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
 		            <td class="m" data-title="Size">{{info.size}}</td>
 		            <td class="m" data-title="Weight">{{info.weight}}</td>
-		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="In date">{{info.in_date|date:"Y-m-d"}}</td>
 		            <td class="m" data-title="Remark">{{info.remark}}</td>
+                    <td class="m" data-title="Image">
+                        {% if info.image %}
+                            <a href="{{info.image.url}}" target="_blank">
+                                <img src="{{ info.image.url }}" style="width: 3cm; height: 2cm">
+                            </a>
+                        {% endif %}
+                    </td>
 	           	{% else %}
 	           		<td class="m" data-title="Vessel">{{info.vessel}}</td>
 		            <td class="m" data-title="DOC">{{info.docs}}</td>
@@ -118,8 +132,15 @@
 		            <td class="m" data-title="Quantity">{{info.quanty}}</td>
 		            <td class="m" data-title="Size">{{info.size}}</td>
 		            <td class="m" data-title="Weight">{{info.weight}}</td>
-		            <td class="m" data-title="In date">{{info.in_date}}</td>
+		            <td class="m" data-title="In date">{{info.in_date|date:"Y-m-d"}}</td>
 		            <td class="m" data-title="Remark">{{info.remark}}</td>
+                    <td class="m" data-title="Image">
+                        {% if info.image %}
+                            <a href="{{info.image.url}}" target="_blank">
+                                <img src="{{ info.image.url }}" style="width: 3cm; height: 2cm">
+                            </a>
+                        {% endif %}
+                    </td>
 	            {% endif %}
 	        </tr>
 	        {% endfor %}

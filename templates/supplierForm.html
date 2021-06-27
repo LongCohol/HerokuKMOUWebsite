@@ -1,9 +1,6 @@
 <form method="post" style="margin-top: 2cm">{% csrf_token %}
-    <table id="supplierForm" style="margin-left: 15%; margin-right: 15%">
-{#        <col style="width: 5cm">#}
-{#        <col style="width: 5cm">#}
-{#        <col style="width: 5cm">#}
-{#        <col style="width: 5cm">#}
+    <table id="supplierForm">
+
         <col style="width: 10%">
         <col style="width: 10%">
         <col style="width: 10%">
@@ -25,15 +22,12 @@
 
         <tbody>
             <tr style="height: 1.2cm">
-                <td style="text-align: center">{{ supplierForm.splID }}</td>
-                <td style="text-align: center">{{ supplierForm.splName }}</td>
-                <td style="text-align: center">{{ supplierForm.splPassword }}</td>
-{#                <td style="text-align: center">{{ supplierForm.supplierID }}</td>#}
-{#                <td style="text-align: center">{{ supplierForm.supplierName }}</td>#}
-{#                <td style="text-align: center">{{ supplierForm.SPLpassword }}</td>#}
-                <td style="text-align: center">
-                    <button type="submit" id="saveSupplier" name="saveSupplier" onclick="saveSpl()" class="buttonAccept">Save/Update</button>
-                    <button type="submit" id="deleteSupplier" name="deleteSupplier" onclick="deleteSpl()" class="buttonDelete">Delete</button>
+                <td style="text-align-last: center"><input type="text" name="splID" class="form-control" required="" id="id_splID" placeholder="Set a new ID"></td>
+                <td style="text-align-last: center"><input type="text" name="splName" class="form-control" required="" id="id_splName" placeholder="Supplier name"></td>
+                <td style="text-align-last: center"><input type="text" name="splPassword" class="form-control" required="" id="id_splPassword" placeholder="Set password"></td>
+                <td style="text-align-last: center">
+                    <button type="submit" id="saveSupplier" name="saveSupplier" onclick="saveSpl()" class="btn btn-success">Save/Update</button>
+                    <button type="submit" id="deleteSupplier" name="deleteSupplier" onclick="deleteSpl()" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
 
