@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from Operator.views import adminView, frontView, logged_out, staff_in, customer_in, shipment_print, mainView1, mainView2
-import notifications.urls
+# import notifications.urls
 from django.conf.urls import url
 from django.conf.urls import include
 
@@ -29,7 +29,7 @@ urlpatterns = [
     path('', frontView, name="frontpage"),
     path('staff_in/', staff_in, name="staff_redirect"),
     path('customer_in/', customer_in, name="customer_redirect"),
-    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    # url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('logged_out/', logged_out, name="logged_out"),
     path('main_page_staff/', mainView1, name="mainPage1"),
     path('main_page_customer/', mainView2, name="mainPage2"),
