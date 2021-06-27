@@ -98,22 +98,32 @@ WSGI_APPLICATION = 'WebsiteCompany_2021_03.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': BASE_DIR / 'db.sqlite3',
+#     # },
+#     'default': {                                                    # MUST HAVE THIS 'DEFAULT' DATABASE!
+#         'ENGINE': 'django.db.backends.mysql',                       # Type of database: MySQL
+#         'NAME': 'company_data',                                     # name of database
+#         'USER': 'root',                                             # username for host
+#         'PASSWORD': '',                                             # password for host
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+#     },
+# }
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
-    'default': {                                                    # MUST HAVE THIS 'DEFAULT' DATABASE!
-        'ENGINE': 'django.db.backends.mysql',                       # Type of database: MySQL
-        'NAME': 'company_data',                                     # name of database
-        'USER': 'root',                                             # username for host
-        'PASSWORD': '',                                             # password for host
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    },
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'company_data',
+       'USER': 'postgres',
+       'PASSWORD': 'lnblong1470',
+       'HOST': 'localhost',
+       'PORT': 5432,
+   }
 }
 
 

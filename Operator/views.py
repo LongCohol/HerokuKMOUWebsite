@@ -34,30 +34,30 @@ BY_LIST = ['Select', 'DHL', 'FDX', 'TNT', 'AIR', 'SEA', 'SFX']
 
 RESULT_PER_PAGE = 100
 VESSEL_KEY = {}
-accounts = Account.objects.all()
-shipments = Shipment.objects.all()
+# accounts = Account.objects.all()
+# shipments = Shipment.objects.all()
 COMP_LIST = []
 VESS_LIST = []
-for account in accounts:
-    if account.vesselList is not "":
-        vesselowned = []
-        companyOwner = account.companyName
-        COMP_LIST.append(companyOwner)
-        vesselOwned = account.vesselList.split(',')
-        for vessel in vesselOwned:
-            vesselowned.append(vessel)
-            VESS_LIST.append(vessel)
-            VESSEL_KEY[vessel] = companyOwner
-            CONTEXT[vessel] = companyOwner
+# for account in accounts:
+#     if account.vesselList is not "":
+#         vesselowned = []
+#         companyOwner = account.companyName
+#         COMP_LIST.append(companyOwner)
+#         vesselOwned = account.vesselList.split(',')
+#         for vessel in vesselOwned:
+#             vesselowned.append(vessel)
+#             VESS_LIST.append(vessel)
+#             VESSEL_KEY[vessel] = companyOwner
+#             CONTEXT[vessel] = companyOwner
 
-CONTEXT["allCompanies"] = COMP_LIST
-CONTEXT["allVessels"] = VESS_LIST
-CONTEXT["allBys"] = BY_LIST
-CONTEXT["allUnits"] = UNIT_LIST
-CONTEXT["allWarehouses"] = WAREHOUSE_LIST
-CONTEXT["totalShipments"] = len(shipments)
+# CONTEXT["allCompanies"] = COMP_LIST
+# CONTEXT["allVessels"] = VESS_LIST
+# CONTEXT["allBys"] = BY_LIST
+# CONTEXT["allUnits"] = UNIT_LIST
+# CONTEXT["allWarehouses"] = WAREHOUSE_LIST
+# CONTEXT["totalShipments"] = len(shipments)
 VESSEL_KEY_JS = json.dumps(CONTEXT)
-CONTEXT["vessel_key"] = VESSEL_KEY_JS
+# CONTEXT["vessel_key"] = VESSEL_KEY_JS
 
 
 def adminView(request):
